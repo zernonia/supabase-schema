@@ -1,27 +1,101 @@
-# Vue 3 + Typescript + Vite
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/zernonia/supabase-schema">
+    <img src="src/assets/logo.svg" alt="Logo" width="80" height="80">
+  </a>
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+  <h3 align="center">Supabase Schema</h3>
 
-## Recommended IDE Setup
+  <p align="center">
+    Secured & Simple <strong><a href="https://supabase.io/">Supabase</a> Schema Visualizer.</strong>
+    <br />
+    No installations • No Database password required.
+    <br />
+    <br />
+    <a href="https://supabase-schema.vercel.app/">View Demo</a>
+    ·
+    <a href="https://github.com/zernonia/supabase-schema/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/zernonia/supabase-schema/issues">Request Feature</a>
+  </p>
+</p>
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+[![Supabase Schema][supbase-schema]](https://github.com/zernonia/supabase-schema/images/main.png)
 
-### If Using `<script setup>`
+## 🚀 Features
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+- 🔨 No installations
+- 🔒 Persistent State in LocalStorage
+- 🚪 Login-less
+- 👀 No Sensitive info required
+- 🤚 Moveable Schema for own design
 
-## Type Support For `.vue` Imports in TS
+## 📇 About The Project
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+I look around the internet and found many Database Schema Visualizers that require me to either download the software, or login to view my Database Schema. I feel like there's too many unneccessary steps, just to view the schema.
 
-### If Using Volar
+Thus, I've decided to take this opportunity to build this **Open Source, Free, Login-less and Secured** Supabase Schema Visualizer 🔥
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+### 🔨 Built With
 
-### If Using Vetur
+- [Vue 3](https://v3.vuejs.org/)
+- [Vite](https://vitejs.dev/)
+- [WindiCSS](https://windicss.org/)
 
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+## 🐾 Instructions
+
+1. Go to [Supabase App](https://app.supabase.io/)
+2. Select your Project
+3. Go to `Settings`
+4. In Settings tab, Go to `API`
+5. Under `Config`, copy `URL`
+6. Under `API Keys`, copy `anon` `public`
+7. Paste both value into their respectively slot in [Supabase Schema](https://supabase-schema.vercel.app/)
+8. Fetch data
+9. Enjoy the Visualization 🎉
+
+Remeber to ⭐ this repo if you ❤ this Apps
+
+## 🌎 Local Development
+
+### Prerequisites
+
+Yarn
+
+- ```sh
+  npm install --global yarn
+  ```
+
+### Development
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/zernonia/supabase-schema.git
+   ```
+2. Install NPM packages
+   ```sh
+   yarn install
+   ```
+3. Run Development instance
+   ```sh
+   yarn dev
+   ```
+
+## ➕ Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contact
+
+Zernonia - [@zernonia](https://twitter.com/zernonia) - zernonia@gmail.com

@@ -1,7 +1,7 @@
 import { useStorage } from '@vueuse/core'
 import { reactive } from 'vue'
 
-export const state: any = reactive({
+export let state: any = reactive({
   tables: [],
   getTable: (name: string) => {
     state[name] = useStorage(name, {

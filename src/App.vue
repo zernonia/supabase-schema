@@ -29,6 +29,7 @@
     </div>
     <VSettings></VSettings>
   </main>
+  <VLoading v-if="isFetching"></VLoading>
 </template>
 
 <script lang="ts">
@@ -36,14 +37,17 @@
   import { useStorage } from '@vueuse/core'
   import VTable from './components/Table.vue'
   import VSettings from './components/Settings.vue'
+  import VLoading from './components/Loading.vue'
   import { state } from './store'
   export default defineComponent({
     components: {
       VTable,
       VSettings,
+      VLoading,
     },
     setup() {
       const isMounted = ref(false)
+      const isFetching = ref(false)
       onMounted(() => (isMounted.value = true))
       // Canvas
       const canvas = ref<any>(null)
@@ -95,6 +99,7 @@
 
       return {
         isMounted,
+        isFetching,
         state,
 
         canvas,

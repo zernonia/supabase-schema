@@ -36,7 +36,7 @@
 
 <script lang="ts">
   import { toRefs } from '@vueuse/core'
-  import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
+  import { computed, defineComponent, onBeforeMount, PropType, ref } from 'vue'
   import { Table } from '../interface'
   import Connector from './Connector.vue'
   import { state } from '../store'
@@ -55,7 +55,6 @@
     },
     emits: ['tableDragging'],
     setup(prop, { emit }) {
-      // Dragging Event
       const { scale, table } = toRefs(prop)
       const isDragging = ref(false)
       const ix = ref(0) //initial
@@ -63,7 +62,22 @@
 
       state.getTable(`${table?.value?.title}`)
       const position = computed(() => state[`${table?.value?.title}`]) // position
+      const index = computed(() =>
+        state.tables.findIndex((item: any) => item.title == table?.value?.title)
+      )
+      // First mount
+      onBeforeMount(() => {
+        if (position.value.x == 0 && position.value.y == 0) {
+          autoArrange()
+        }
+      })
 
+      const autoArrange = () => {
+        position.value.x = (index.value % 3) * 300 + 50
+        position.value.y = Math.floor(index.value / 3) * 300 + 50
+      }
+
+      // Dragging Event
       const dragStart = (e: MouseEvent) => {
         emit('tableDragging', true)
         isDragging.value = true
