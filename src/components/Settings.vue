@@ -5,7 +5,7 @@
   >
     <div class="relative bg-dark-800 p-6 rounded-bl-md">
       <div class="w-full flex justify-center">
-        <img src="src/assets/logo.svg" class="h-32" alt="" />
+        <img :src="Logo" class="h-32" alt="" />
       </div>
       <h1
         style="-webkit-text-fill-color: transparent"
@@ -30,7 +30,7 @@
               <a
                 class="underline hover:text-green-500"
                 target="_blank"
-                href="https://supabase.io/docs/reference/javascript/generating-types#generate-database-types-from-openapi-specification"
+                href="https://github.com/zernonia/supabase-schema#-instructions"
                 >here</a
               >
             </li>
@@ -87,6 +87,8 @@
   import { useStorage } from '@vueuse/core'
   import { Table, Column } from '../interface'
   import { state } from '../store'
+  import Logo from '../assets/logo.svg'
+
   export default defineComponent({
     emits: ['fetch'],
     setup(prop, { emit }) {
@@ -177,6 +179,7 @@
       })
 
       return {
+        Logo,
         title,
         url,
         anon,

@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@vueuse/core": "^4.9.1",
-    "@vueuse/head": "^0.5.1",
     "vue": "^3.0.11"
   },
   "devDependencies": {
