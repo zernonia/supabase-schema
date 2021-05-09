@@ -21,7 +21,7 @@
   </p>
 </p>
 
-[![Supabase Schema][supbase-schema]](https://github.com/zernonia/supabase-schema/images/main.png)
+![Supabase Schema](images/main.png)
 
 ## 🚀 Features
 
@@ -92,10 +92,16 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
+## 🙏 Acknowledgement
+
+1. Fundamental for this Visualization ([Generate database types from OpenAPI specification](https://supabase.io/docs/reference/javascript/generating-types#generate-database-types-from-openapi-specification))
+2. Guide to Construct Dynamic SVG Connector ([Connecting Table using SVG](https://codepen.io/alojzije/pen/ndfrI))
+3. [Icones - icon gallery](https://icones.js.org/)
+
+## 📜 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## Contact
+## 📧 Contact
 
 Zernonia - [@zernonia](https://twitter.com/zernonia) - zernonia@gmail.com
