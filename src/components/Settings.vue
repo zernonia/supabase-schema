@@ -113,9 +113,12 @@
               format: colVal.format.split(' ')[0],
               type: colVal.type,
               default: colVal.default ? colVal.default : undefined,
-              required: value.required.includes(colKey) ? true : false,
+              required:
+                value.required && value.required?.includes(colKey)
+                  ? true
+                  : false,
               pk:
-                colVal.description && colVal.description.includes('<pk/>')
+                colVal.description && colVal.description?.includes('<pk/>')
                   ? true
                   : false,
               fk: colVal.description
