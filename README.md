@@ -98,6 +98,12 @@ Contributions are what make the open source community such an amazing place to b
 2. Guide to Construct Dynamic SVG Connector ([Connecting Table using SVG](https://codepen.io/alojzije/pen/ndfrI))
 3. [Icones - icon gallery](https://icones.js.org/)
 
+## 📈 Analytics
+
+I'm using [Umami Analytics](https://umami.is/docs/about) because I'm interested in the distributions of user who uses Supabase and this tool.
+
+[This](https://umami-zernonia.vercel.app/share/yzSUulXQ/Supabase%20Schema) is the public URL for the analytics. Enjoy!
+
 ## 📜 License
 
 Not Associated with Supabase.
