@@ -1,7 +1,8 @@
 <template>
   <div
-    class="pb-2 absolute z-20 box rounded-md overflow-hidden bg-dark-700 border border-dark-border hover:border-green-500 cursor-pointer"
+    class="pb-2 absolute z-20 box rounded-md overflow-hidden bg-dark-700 border border-dark-border hover:border-green-500"
     :style="{ top: position.y + 'px', left: position.x + 'px' }"
+    style="cursor: grab"
     @mousedown.prevent="dragStart"
   >
     <h5
@@ -46,7 +47,10 @@
       Connector,
     },
     props: {
-      table: Object as PropType<Table>,
+      table: {
+        type: Object as PropType<Table>,
+        required: true,
+      },
       scale: {
         type: Number,
         required: true,
@@ -60,10 +64,13 @@
       const ix = ref(0) //initial
       const iy = ref(0)
 
-      state.getTable(`${table?.value?.title}`)
-      const position = computed(() => state[`${table?.value?.title}`]) // position
+      const position = computed(
+        () => state.tables[`${table.value.title}`].position
+      ) // position
       const index = computed(() =>
-        state.tables.findIndex((item: any) => item.title == table?.value?.title)
+        Object.keys(state.tables).findIndex(
+          (item: any) => item == table.value.title
+        )
       )
       // First mount
       onBeforeMount(() => {
@@ -88,7 +95,7 @@
       }
       const dragEvent = (e: MouseEvent) => {
         if (!isDragging) return
-        state[`${table?.value?.title}`] = {
+        state.tables[`${table.value.title}`].position = {
           x: (e.clientX - ix.value) / scale.value,
           y: (e.clientY - iy.value) / scale.value,
         }

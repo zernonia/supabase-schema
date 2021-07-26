@@ -7,11 +7,17 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.11.14",
     "@vueuse/core": "^4.9.1",
-    "vue": "^3.0.11"
+    "apexcharts": "^3.26.3",
+    "d3": "^6.7.0",
+    "vue": "^3.0.11",
+    "vue-router": "4",
+    "vue3-apexcharts": "^1.4.0"
   },
   "devDependencies": {
     "@iconify/json": "^1.1.339",
+    "@types/d3": "^6.6.0",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
     "@vitejs/plugin-vue": "^1.2.2",

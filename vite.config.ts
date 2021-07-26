@@ -9,9 +9,10 @@ export default defineConfig({
   plugins: [
     vue(),
     Components({
+      directoryAsNamespace: true,
       customComponentResolvers: ViteIconsResolver(),
     }),
     ViteIcons(),
-    WindiCSS()
-  ]
+    WindiCSS(),
+  ],
 })

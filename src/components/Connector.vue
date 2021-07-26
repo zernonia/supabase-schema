@@ -2,8 +2,8 @@
   <svg class="absolute z-10 opacity-50" :id="svg" width="0" height="0">
     <path
       ref="path"
-      class="fill-transparent stroke-white"
-      style="stroke-width: 3px"
+      class="stroke-white fill-transparent"
+      style="stroke-width: 3px; pointer-event: stroke"
     ></path>
     <circle :cx="fkPos.x" :cy="fkPos.y" r="5" class="stroke-white fill-current">
       fk
@@ -40,8 +40,12 @@
 
       const tableName = computed(() => id.value.split('.')[0])
       const tableTargetName = computed(() => target.value.split('.')[0])
-      const positionStart = computed(() => state[`${tableName.value}`])
-      const positionEnd = computed(() => state[`${tableTargetName.value}`])
+      const positionStart = computed(
+        () => state.tables[`${tableName.value}`].position
+      )
+      const positionEnd = computed(
+        () => state.tables[`${tableTargetName.value}`].position
+      )
 
       const fkPos = ref({
         x: 0,
