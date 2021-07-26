@@ -13,7 +13,7 @@
       class="absolute select-none relative boxes"
     >
       <div id="canvas-children">
-        <VTable
+        <Table
           v-for="table in state.tables"
           :key="table.title"
           :table="table"
@@ -29,13 +29,9 @@
 <script lang="ts">
   import { defineComponent, computed, ref, onMounted } from 'vue'
   import { useStorage } from '@vueuse/core'
-  import VTable from '../components/Table.vue'
   import { state } from '../store'
 
   export default defineComponent({
-    components: {
-      VTable,
-    },
     setup() {
       const isMounted = ref(false)
       const isFetching = ref(false)

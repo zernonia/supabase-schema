@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Schema from './views/Schema.vue'
-import Dashboard from './views/Dashboard.vue'
 
 const routes = [
-  { path: '/', name: 'Schema', component: Schema },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/', name: 'Schema', component: () => import('./views/Schema.vue') },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import('./views/Dashboard.vue'),
+  },
 ]
 
 const router = createRouter({

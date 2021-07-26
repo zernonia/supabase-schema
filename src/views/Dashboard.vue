@@ -13,7 +13,7 @@
       class="absolute select-none relative boxes"
     >
       <div id="canvas-children">
-        <VVisual
+        <Visual
           :scale="view.scale"
           :mounted="isMounted"
           @visual-dragging="isDraggingChild = $event"
@@ -26,13 +26,9 @@
 <script lang="ts">
   import { defineComponent, computed, ref, onMounted } from 'vue'
   import { useStorage } from '@vueuse/core'
-  import VVisual from '../components/Visual.vue'
   import { state } from '../store'
 
   export default defineComponent({
-    components: {
-      VVisual,
-    },
     setup() {
       const isMounted = ref(false)
       const isFetching = ref(false)
