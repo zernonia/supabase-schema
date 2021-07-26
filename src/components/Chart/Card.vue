@@ -1,21 +1,25 @@
 <template>
-  <div>
-    <h3>{{ measure }}</h3>
-    <title>Count for X</title>
+  <div class="w-full h-full relative flex items-center justify-center">
+    <h1 class="absolute top-5 text-2xl font-medium">
+      {{
+        modelValue.customize.titleText
+          ? modelValue.customize.titleText
+          : modelValue.customize.defaultTitleText
+      }}
+    </h1>
+    <p class="text-6xl font-medium text-white">{{ modelValue.config.data }}</p>
   </div>
 </template>
 
 <script lang="ts">
-  import { toRefs } from '@vueuse/core'
   import { defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
-      measure: Number,
-    },
-    setup(prop) {
-      const { measure } = toRefs(prop)
-      return {}
+      modelValue: {
+        type: Object,
+        required: true,
+      },
     },
   })
 </script>

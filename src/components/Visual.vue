@@ -10,11 +10,11 @@
       :style="{ width: size.width + 'px', height: size.height + 'px' }"
       class="text-white-800 flex flex-row justify-center items-center"
     >
-      <ChartCard :measure="config.data"></ChartCard>
+      <ChartCard v-model="visualData"></ChartCard>
     </div>
   </div>
   <div
-    class="absolute relative w-64 top-0 left-70 bg-dark-700 flex flex-col p-4 pb-8 rounded-md rounded-tl-none z-20"
+    class="absolute relative w-64 bg-dark-700 flex flex-col p-4 pb-8 rounded-md rounded-tl-none z-20"
     :style="{ top: position.y + 'px', left: position.x + width + 20 + 'px' }"
   >
     <div class="absolute -top-10 left-0 flex flex-row">
@@ -40,7 +40,7 @@
         <i-line-md:paint-drop-half-twotone></i-line-md:paint-drop-half-twotone>
       </div>
     </div>
-    <div id="icon-list" v-if="tab == 'chart'">
+    <div id="icon-list" v-show="tab == 'chart'">
       <SelectChart v-model="graphType" value="card">
         <i-fluent:number-symbol-square-20-regular />
       </SelectChart>
@@ -60,25 +60,24 @@
         <i-ant-design:table-outlined />
       </SelectChart>
     </div>
-    <div v-if="tab == 'config'">
-      <ConfigCard v-model="config" />
-      <!-- <component :is="'config-' + graphType" v-model="config"></component> -->
+    <div v-show="tab == 'config'">
+      <component :is="currentConfig" v-model="visualData.config" />
     </div>
-    <div v-if="tab == 'customize'"></div>
-    <!-- <button
-      class="mt-4 bg-green-500 rounded-md px-4 py-0 h-8 text-sm font-semibold hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600"
-      @click.prevent="fetchData"
-    >
-      Fetch
-    </button> -->
+    <div v-show="tab == 'customize'">
+      <component :is="currentCustomize" v-model="visualData" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { toRefs } from '@vueuse/core'
-  import { defineComponent, ref } from 'vue'
+  import { toRefs, useStorage } from '@vueuse/core'
+  import { computed, defineComponent, ref } from 'vue'
   import { state } from '../store'
   import { useResizeObserver } from '@vueuse/core'
+
+  import ConfigCard from './Config/Card.vue'
+
+  import CustomizeCard from './Customize/Card.vue'
 
   export default defineComponent({
     emits: ['visualDragging'],
@@ -89,6 +88,7 @@
       },
       mounted: Boolean,
     },
+    components: { ConfigCard, CustomizeCard },
     setup(prop, { emit }) {
       const { scale } = toRefs(prop)
       const isDragging = ref(false)
@@ -130,12 +130,19 @@
 
       // tab
       const tab = ref('chart')
-
       // graph
       const graphType = ref('card')
-
       // config
-      const config = ref({})
+      const visualData = useStorage('visual1', {
+        config: {},
+        customize: {},
+      })
+      const currentConfig = computed(() => {
+        return 'config-' + graphType.value
+      })
+      const currentCustomize = computed(() => {
+        return 'customize-' + graphType.value
+      })
 
       // form info
       const el = ref(null)
@@ -156,12 +163,13 @@
         size,
 
         tab,
-
         graphType,
+        currentConfig,
+        currentCustomize,
 
         el,
         width,
-        config,
+        visualData,
       }
     },
   })
@@ -175,6 +183,6 @@
     @apply w-full p-2 rounded-md flex justify-center opacity-50 hover:opacity-100 hover:bg-dark-600 focus:outline-none;
   }
   #icon-list > button > svg {
-    @apply w-6 h-6;
+    @apply w-8 h-8 p-0.5;
   }
 </style>

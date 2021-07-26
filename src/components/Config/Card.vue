@@ -1,11 +1,17 @@
 <template>
   <div>
-    <label class="mr-2 text-sm font-semibold uppercase">Table</label>
-    <Select v-model="modelValue.table" :options="tableList"></Select>
-    <label class="mr-2 mt-2 text-sm font-semibold uppercase">Column</label>
-    <Select v-model="modelValue.column" :options="columnList"></Select>
-    <label class="mr-2 mt-2 text-sm font-semibold uppercase">Measure</label>
-    <Select v-model="modelValue.measure" :options="measureList"></Select>
+    <div>
+      <label class="mr-2 text-sm font-medium uppercase">Table</label>
+      <Select v-model="modelValue.table" :options="tableList"></Select>
+    </div>
+    <div v-if="columnList.length">
+      <label class="mr-2 text-sm font-medium uppercase">Column</label>
+      <Select v-model="modelValue.column" :options="columnList"></Select>
+    </div>
+    <div>
+      <label class="mr-2 text-sm font-medium uppercase">Measure</label>
+      <Select v-model="modelValue.measure" :options="measureList"></Select>
+    </div>
   </div>
 </template>
 
@@ -17,10 +23,10 @@
   import * as d3 from 'd3'
 
   interface Config {
-    table?: string
-    column?: string
-    measure?: string
-    data?: number
+    table: string
+    column: string
+    measure: string
+    data: any
   }
   export default defineComponent({
     props: {
@@ -56,7 +62,13 @@
             .map((a) => a.title)
         }
       })
-      const measureList = ref(['max', 'min', 'count', 'average'])
+      const measureList = computed(() => {
+        if (columnList.value.length) {
+          return ['max', 'min', 'count', 'average']
+        } else {
+          return ['count']
+        }
+      })
 
       const calculated = computed(() => {
         if (!dataJSON.value.length) return 0
@@ -82,7 +94,6 @@
 
       // fetch Supabase Data
       const dataJSON = ref([])
-      const df = ref()
       const fetchData = async () => {
         if (modelValue.value.table) {
           const { data, error } = await supabaseClientState
@@ -90,13 +101,13 @@
             .from(modelValue.value.table)
             .select('*')
           dataJSON.value = data as []
-          console.log(dataJSON.value)
         }
       }
 
       watch(
         () => modelValue.value.table,
         () => {
+          modelValue.value.measure = 'count'
           fetchData()
         }
       )

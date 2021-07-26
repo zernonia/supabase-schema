@@ -18,13 +18,13 @@
           ></i-mdi-github>
         </a>
       </h1>
-      <h6 class="text-dark-500 font-semibold text-sm">
+      <h6 class="text-dark-500 font-medium text-sm">
         Open Source • LocalStorage
       </h6>
       <div class="mt-4">
         <details :open="true">
-          <summary class="font-semibold uppercase">Steps</summary>
-          <ol class="mt-2 text-snow ml-8 list-decimal leading-tight">
+          <summary class="font-medium uppercase">Steps</summary>
+          <ol class="mt-2 text-white-700 ml-8 list-decimal leading-tight">
             <li class="py-2">
               Obtain OpenAPI URL following instruction
               <a
@@ -40,30 +40,30 @@
         </details>
       </div>
       <form class="flex flex-col mt-4">
-        <label for="website" class="mr-2 text-sm font-semibold uppercase"
+        <label for="website" class="mr-2 text-sm font-medium uppercase"
           >Url</label
         >
-        <input
+        <InputText
           type="text"
           name="url"
           placeholder="https://your-project.supabase.co"
           v-model="supabaseClientState.apikey.url"
-          class="bg-dark-900 placeholder-dark-500 mr-2 rounded-md px-4 py-2 h-10 flex-grow border-dark-border focus:border-green-500 focus:ring-green-500"
+          class="bg-dark-900 text-white-700 placeholder-dark-500 mr-2 rounded-md px-4 py-2 h-10 flex-grow border-dark-border focus:border-green-500 focus:ring-green-500"
         />
-        <label for="anon" class="mr-2 mt-2 text-sm font-semibold uppercase"
+        <label for="anon" class="mr-2 mt-2 text-sm font-medium uppercase"
           >API Keys</label
         >
-        <input
+        <InputText
           type="text"
           name="anon"
           placeholder="your-anon-key"
           v-model="supabaseClientState.apikey.anon"
           @keyup.enter="fetchData"
-          class="bg-dark-900 placeholder-dark-500 mr-2 rounded-md px-4 py-2 h-10 flex-grow border-dark-border focus:border-green-500 focus:ring-green-500"
+          class="bg-dark-900 text-white-700 placeholder-dark-500 mr-2 rounded-md px-4 py-2 h-10 flex-grow border-dark-border focus:border-green-500 focus:ring-green-500"
         />
         <div class="flex justify-end mt-4">
           <button
-            class="bg-green-500 rounded-md px-4 py-0 h-8 text-sm font-semibold hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600"
+            class="bg-green-500 rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600"
             @click.prevent="fetchData"
           >
             Fetch

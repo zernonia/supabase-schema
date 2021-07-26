@@ -6,7 +6,7 @@
     @mousedown.prevent="dragStart"
   >
     <h5
-      class="py-2 pb-3 px-2 bg-dark-800 font-semibold text-lg text-center border-b border-dark-border"
+      class="py-2 pb-3 px-2 bg-dark-800 font-medium text-lg text-center border-b border-dark-border"
     >
       {{ table?.title }}
     </h5>
@@ -19,7 +19,7 @@
         <p class="flex-grow">
           {{ col.title }}
         </p>
-        <p class="ml-8 flex-grow-0 text-sm text-white-900">
+        <p class="ml-10 flex-grow-0 text-sm text-white-900">
           {{ col.format }}
         </p>
       </div>
@@ -37,10 +37,17 @@
 
 <script lang="ts">
   import { toRefs } from '@vueuse/core'
-  import { computed, defineComponent, onBeforeMount, PropType, ref } from 'vue'
+  import {
+    computed,
+    defineComponent,
+    onBeforeMount,
+    onMounted,
+    PropType,
+    ref,
+  } from 'vue'
   import { Table } from '../interface'
   import Connector from './Connector.vue'
-  import { state } from '../store'
+  import { state, supabaseClientState } from '../store'
 
   export default defineComponent({
     components: {
@@ -106,6 +113,11 @@
         document.onmousemove = null
         document.onmouseup = null
       }
+
+      // clear previous v1 localstorage
+      onMounted(() => {
+        if (supabaseClientState.apikey.url == '') localStorage.clear()
+      })
 
       return {
         isDragging,

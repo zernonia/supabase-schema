@@ -1,16 +1,14 @@
 <template>
-  <div>
+  <div ref="target" class="mb-2">
     <button
-      ref="targetParent"
-      class="w-full bg-dark-900 mr-2 rounded-md px-4 py-2 mt-2 border-dark-border ring ring-transparent focus:border-green-500 focus:ring-green-500 focus:outline-none flex justify-between relative"
+      class="w-full text-white-700 bg-dark-900 mr-2 rounded-md px-4 py-2 h-10 border border-dark-border ring ring-transparent focus:ring-green-500 focus:outline-none flex justify-between relative"
       @click.prevent="isOpen = !isOpen"
     >
       <span>{{ modelValue }} </span>
-      <i-entypo:select-arrows class="mt-1 p-2px"></i-entypo:select-arrows>
+      <i-entypo:select-arrows class="mt-0.5 p-2px"></i-entypo:select-arrows>
     </button>
     <ul
       v-if="isOpen"
-      ref="target"
       class="absolute mt-1 w-56 bg-dark-900 rounded-md overflow-hidden border-dark-border border z-50"
     >
       <li
@@ -44,7 +42,8 @@
         emit('update:modelValue', title)
       }
       onClickOutside(target, (event) => {
-        targetParent.value == event.srcElement ? '' : (isOpen.value = false)
+        isOpen.value = false
+        // targetParent.value == event.srcElement ? '' : (isOpen.value = false)
       })
 
       return {

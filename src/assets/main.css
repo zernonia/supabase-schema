@@ -1,0 +1,12 @@
+@font-face {
+  font-family: custom-font;
+  font-weight: 500;
+  font-style: normal;
+  src: url(./fonts/CustomFont-Medium.woff2) format('woff2');
+}
+
+html {
+  font-family: custom-font, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica,
+    Arial, sans-serif;
+}
