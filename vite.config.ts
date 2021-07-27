@@ -11,11 +11,10 @@ export default defineConfig({
       output: {
         manualChunks: {
           d3: ['d3'],
-          apexchart: ['apexcharts'],
+          chartjs: ['vue-chart-3'],
         },
       },
     },
-    chunkSizeWarningLimit: 500,
   },
   plugins: [
     vue(),
