@@ -4,6 +4,7 @@
     class="absolute z-20 box rounded-md bg-dark-700 border border-dark-border hover:border-green-500"
     :style="{ top: position.y + 'px', left: position.x + 'px' }"
     @mousedown.prevent="dragStart"
+    @click="isConfigOpen = true"
   >
     <div
       style="cursor: grab"
@@ -14,8 +15,10 @@
     </div>
   </div>
   <div
+    ref="elConfig"
     class="absolute relative w-64 bg-dark-700 flex flex-col p-4 pb-8 rounded-md rounded-tl-none z-20"
     :style="{ top: position.y + 'px', left: position.x + width + 20 + 'px' }"
+    v-if="isConfigOpen"
   >
     <div class="absolute -top-10 left-0 flex flex-row">
       <div
@@ -70,7 +73,7 @@
 </template>
 
 <script lang="ts">
-  import { toRefs, useStorage } from '@vueuse/core'
+  import { onClickOutside, toRefs, useStorage } from '@vueuse/core'
   import { computed, defineComponent, ref } from 'vue'
   import { state } from '../store'
   import { useResizeObserver } from '@vueuse/core'
@@ -133,6 +136,8 @@
       // graph
       const graphType = ref('card')
       // config
+      const elConfig = ref(null)
+      const isConfigOpen = ref(false)
       const visualData = useStorage('visual1', {
         config: {},
         customize: {},
@@ -142,6 +147,10 @@
       })
       const currentCustomize = computed(() => {
         return 'customize-' + graphType.value
+      })
+
+      onClickOutside(elConfig, (e) => {
+        isConfigOpen.value = false
       })
 
       // form info
@@ -163,6 +172,8 @@
         size,
 
         tab,
+        elConfig,
+        isConfigOpen,
         graphType,
         currentConfig,
         currentCustomize,
@@ -175,7 +186,7 @@
   })
 </script>
 
-<style>
+<style lang="postcss">
   #icon-list {
     @apply grid grid-cols-4 place-items-center gap-2;
   }

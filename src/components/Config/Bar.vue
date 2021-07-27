@@ -54,9 +54,7 @@
         if (!modelValue.value.table) {
           return []
         } else {
-          modelValue.value.column = modelValue.value.column
-            ? modelValue.value.column
-            : '*'
+          modelValue.value.column = '*'
           const tbl = state.tables[modelValue.value.table].columns as Column[]
 
           return tbl

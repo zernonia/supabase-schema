@@ -44,6 +44,19 @@ export const state = reactive({
     // console.log(tableGroup, state.tables)
     state.tables = tableGroup
   },
+  visuals: useStorage('visual-list', {} as any),
+  addVisual: () => {
+    // I generate the UID from two parts here
+    // to ensure the random number provide enough bits.
+    const firstPart = (Math.random() * 46656) | 0
+    const secondPart = (Math.random() * 46656) | 0
+    const first = ('000' + firstPart.toString(36)).slice(-3)
+    const second = ('000' + secondPart.toString(36)).slice(-3)
+    const combine = first + second
+    state.visuals[combine] = {
+      id: combine,
+    }
+  },
 })
 
 export const supabaseClientState = reactive({

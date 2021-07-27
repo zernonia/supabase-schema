@@ -4,6 +4,8 @@
       type="number"
       :name="name"
       :value="modelValue"
+      :min="min"
+      :max="max"
       @input="inputValue"
       class="w-full bg-dark-900 text-white-700 placeholder-dark-500 rounded-md px-4 py-2 h-10 w-full border-dark-border focus:border-green-500 focus:ring-green-500"
     />
@@ -26,6 +28,14 @@
       postfix: {
         type: String,
         default: 'px',
+      },
+      min: {
+        type: Number,
+        default: 8,
+      },
+      max: {
+        type: Number,
+        default: 100,
       },
     },
     emits: ['update:modelValue'],

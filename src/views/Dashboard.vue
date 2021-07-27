@@ -18,6 +18,15 @@
           :mounted="isMounted"
           @visual-dragging="isDraggingChild = $event"
         />
+        <div
+          class="absolute top-0 left-0 w-300px h-300px bg-dark-700 rounded-md"
+        >
+          <button
+            class="w-full h-full flex items-center justify-center opacity-50 hover:opacity-100 focus:outline-none"
+          >
+            <i-mdi:chart-box-plus-outline class="w-16 h-16" />
+          </button>
+        </div>
       </div>
     </div>
   </div>

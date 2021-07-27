@@ -12,14 +12,6 @@
       <label class="mr-2 text-sm font-medium uppercase">Measure Size</label>
       <InputNumber v-model="modelValue.customize.measureSize" />
     </div>
-    <div>
-      <label class="mr-2 text-sm font-medium uppercase">Decimal</label>
-      <InputNumber
-        v-model="modelValue.customize.decimal"
-        :postfix="''"
-        :min="0"
-      />
-    </div>
   </div>
 </template>
 
@@ -41,7 +33,6 @@
           titleText: '',
           titleSize: 28,
           measureSize: 64,
-          decimal: 0,
         },
         ...modelValue.value.customize,
       }

@@ -11,7 +11,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           d3: ['d3'],
-          chartjs: ['vue-chart-3'],
+          chartjs: ['vue-chart-3', 'chart.js'],
         },
       },
     },
