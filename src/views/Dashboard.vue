@@ -14,15 +14,14 @@
     >
       <button @click="state.clearVisual()">Clear Storage</button>
       <div id="canvas-children">
-        <div v-for="(value, id) in state.visuals" :key="id">
-          <Visual
-            v-if="id"
-            :scale="state.dashboardView.scale"
-            :mounted="isMounted"
-            :id="id"
-            @visual-dragging="isDraggingChild = $event"
-          />
-        </div>
+        <Visual
+          v-for="(value, id) in state.visuals"
+          :key="id"
+          :scale="state.dashboardView.scale"
+          :mounted="isMounted"
+          :id="id"
+          @visual-dragging="isDraggingChild = $event"
+        />
 
         <div
           class="absolute top-0 -left-320px w-300px h-300px bg-dark-700 rounded-md"

@@ -1,6 +1,10 @@
 <template>
-  <div class="w-full h-full p-6">
-    <BarChart :options="options" :chartData="data" />
+  <div class="w-full h-full p-8">
+    <BarChart
+      style="width: 100%; height: 100%"
+      :options="options"
+      :chartData="data"
+    />
   </div>
 </template>
 
@@ -42,7 +46,7 @@
       const { modelValue } = toRefs(prop)
 
       const options = computed<ChartOptions<'bar'>>(() => ({
-        responsive: true,
+        maintainAspectRatio: false,
         devicePixelRatio: 2,
         plugins: {
           legend: {
@@ -67,7 +71,7 @@
             ticks: {
               color: '#b4b4b4',
               font: {
-                size: 14,
+                size: 16,
               },
             },
           },
@@ -75,7 +79,7 @@
             ticks: {
               color: '#b4b4b4',
               font: {
-                size: 12,
+                size: 14,
               },
             },
           },
