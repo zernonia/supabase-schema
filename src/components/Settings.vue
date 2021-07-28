@@ -48,7 +48,6 @@
           name="url"
           placeholder="https://your-project.supabase.co"
           v-model="supabaseClientState.apikey.url"
-          class="bg-dark-900 text-white-700 placeholder-dark-500 mr-2 rounded-md px-4 py-2 h-10 flex-grow border-dark-border focus:border-green-500 focus:ring-green-500"
         />
         <label for="anon" class="mr-2 mt-2 text-sm font-medium uppercase"
           >API Keys</label
@@ -59,7 +58,6 @@
           placeholder="your-anon-key"
           v-model="supabaseClientState.apikey.anon"
           @keyup.enter="fetchData"
-          class="bg-dark-900 text-white-700 placeholder-dark-500 mr-2 rounded-md px-4 py-2 h-10 flex-grow border-dark-border focus:border-green-500 focus:ring-green-500"
         />
         <div class="flex justify-end mt-4">
           <button

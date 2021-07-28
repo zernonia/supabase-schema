@@ -26,7 +26,8 @@
     table: string
     column: string
     measure: string
-    data: any
+    data: number[]
+    xLabel: string[]
   }
   export default defineComponent({
     props: {
@@ -43,22 +44,27 @@
           table: '',
           column: '',
           measure: 'count',
-          data: 0,
+          data: [],
+          xLabel: [],
         },
         ...modelValue.value,
       }
       emit('update:modelValue', temp)
 
+      // measures
       const tableList = computed(() => Object.keys(state.tables))
       const columnList = computed(() => {
         if (!modelValue.value.table) {
           return []
         } else {
-          modelValue.value.column = '*'
+          modelValue.value.column = modelValue.value.column
+            ? modelValue.value.column
+            : '*'
           const tbl = state.tables[modelValue.value.table].columns as Column[]
 
           return tbl
-            .filter((a) => a.type == 'number' || a.type == 'integer')
+            .filter((a) => a.format != 'uuid')
+            .filter((a) => a.type == 'string' || a.type == 'boolean')
             .map((a) => a.title)
         }
       })
@@ -70,29 +76,34 @@
         }
       })
 
+      // labels
       const calculated = computed(() => {
-        if (!dataJSON.value.length) return 0
-        switch (modelValue.value.measure) {
-          case 'count':
-            return dataJSON.value.length
-            break
-          case 'min':
-            return d3.min(dataJSON.value.map((a) => a[modelValue.value.column]))
-            break
-          case 'max':
-            return d3.max(dataJSON.value.map((a) => a[modelValue.value.column]))
-            break
-          case 'average':
-            return d3.mean(
-              dataJSON.value.map((a) => a[modelValue.value.column])
-            )
-            break
-          case 'sum':
-            return d3.sum(dataJSON.value.map((a) => a[modelValue.value.column]))
-            break
-          default:
-            return 0
-        }
+        return d3.rollup(
+          dataJSON.value,
+          (v) => v.length,
+          (d) => d[modelValue.value.column]
+        )
+        // switch (modelValue.value.measure) {
+        //   case 'count':
+        //     return dataJSON.value.length
+        //     break
+        //   case 'min':
+        //     return d3.min(dataJSON.value.map((a) => a[modelValue.value.column]))
+        //     break
+        //   case 'max':
+        //     return d3.max(dataJSON.value.map((a) => a[modelValue.value.column]))
+        //     break
+        //   case 'average':
+        //     return d3.mean(
+        //       dataJSON.value.map((a) => a[modelValue.value.column])
+        //     )
+        //     break
+        //   case 'sum':
+        //     return d3.sum(dataJSON.value.map((a) => a[modelValue.value.column]))
+        //     break
+        //   default:
+        //     return 0
+        // }
       })
 
       // fetch Supabase Data
@@ -116,7 +127,12 @@
       )
 
       watch(calculated, (n, o) => {
-        modelValue.value.data = n
+        console.log(n)
+        if (n) {
+          modelValue.value.data = [...n.values()]
+          modelValue.value.xLabel = [...n.keys()]
+        }
+        // modelValue.value.data = n
       })
       return {
         tableList,

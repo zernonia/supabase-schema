@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full h-full p-6">
     <BarChart :options="options" :chartData="data" />
   </div>
 </template>
@@ -14,9 +14,19 @@
     ChartOptions,
     BarElement,
     BarController,
+    CategoryScale,
+    LinearScale,
+    Title,
   } from 'chart.js'
 
-  Chart.register(BarController, BarElement, Tooltip)
+  Chart.register(
+    BarController,
+    BarElement,
+    Tooltip,
+    CategoryScale,
+    LinearScale,
+    Title
+  )
 
   export default defineComponent({
     props: {
@@ -33,6 +43,7 @@
 
       const options = computed<ChartOptions<'bar'>>(() => ({
         responsive: true,
+        devicePixelRatio: 2,
         plugins: {
           legend: {
             display: modelValue.value.customize.legendDisplay,
@@ -40,7 +51,33 @@
           },
           title: {
             display: true,
+            padding: {
+              top: 0,
+              bottom: 20,
+            },
+            color: '#b4b4b4',
+            font: {
+              size: modelValue.value.customize.titleSize,
+            },
             text: modelValue.value.customize.titleText,
+          },
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: '#b4b4b4',
+              font: {
+                size: 14,
+              },
+            },
+          },
+          y: {
+            ticks: {
+              color: '#b4b4b4',
+              font: {
+                size: 12,
+              },
+            },
           },
         },
       }))
@@ -50,6 +87,8 @@
         datasets: [
           {
             data: modelValue.value.config.data,
+            borderWidth: 1,
+            borderColor: [modelValue.value.customize.borderColor],
           },
         ],
       }))

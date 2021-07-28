@@ -12,6 +12,12 @@
       <label class="mr-2 text-sm font-medium uppercase">Measure Size</label>
       <InputNumber v-model="modelValue.customize.measureSize" />
     </div>
+    <div>
+      <label class="mr-2 text-sm font-medium uppercase">Border Color</label>
+      <div class="rounded-full overflow-hidden w-8 h-8 ml-2">
+        <input type="color" v-model="modelValue.customize.borderColor" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,8 +37,9 @@
       const temp = {
         ...{
           titleText: '',
-          titleSize: 28,
-          measureSize: 64,
+          legendDisplay: true,
+          legendPosition: 'top',
+          borderColor: '#111111',
         },
         ...modelValue.value.customize,
       }

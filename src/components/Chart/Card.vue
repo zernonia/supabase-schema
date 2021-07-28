@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative flex items-center justify-center">
     <h1
-      class="absolute top-5 font-medium text-center px-4"
+      class="absolute top-6 font-medium text-center px-6"
       :style="{
         fontSize: modelValue.customize.titleSize + 'px',
       }"
@@ -51,9 +51,14 @@
           .find(function (item) {
             return num >= item.value
           })
-        return item
-          ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol
-          : '0'
+
+        if (item) {
+          return item
+            ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol
+            : '0'
+        } else {
+          return num?.toFixed(digits)
+        }
       }
 
       return {

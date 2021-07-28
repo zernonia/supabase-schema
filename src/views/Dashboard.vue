@@ -12,16 +12,23 @@
       :style="{ transformOrigin, transform: transformation }"
       class="absolute select-none relative boxes"
     >
+      <button @click="state.clearVisual()">Clear Storage</button>
       <div id="canvas-children">
-        <Visual
-          :scale="view.scale"
-          :mounted="isMounted"
-          @visual-dragging="isDraggingChild = $event"
-        />
+        <div v-for="(value, id) in state.visuals" :key="id">
+          <Visual
+            v-if="id"
+            :scale="state.dashboardView.scale"
+            :mounted="isMounted"
+            :id="id"
+            @visual-dragging="isDraggingChild = $event"
+          />
+        </div>
+
         <div
-          class="absolute top-0 left-0 w-300px h-300px bg-dark-700 rounded-md"
+          class="absolute top-0 -left-320px w-300px h-300px bg-dark-700 rounded-md"
         >
           <button
+            @click="state.addVisual()"
             class="w-full h-full flex items-center justify-center opacity-50 hover:opacity-100 focus:outline-none"
           >
             <i-mdi:chart-box-plus-outline class="w-16 h-16" />
@@ -34,7 +41,6 @@
 
 <script lang="ts">
   import { defineComponent, computed, ref, onMounted } from 'vue'
-  import { useStorage } from '@vueuse/core'
   import { state } from '../store'
 
   export default defineComponent({
@@ -44,25 +50,25 @@
       onMounted(() => (isMounted.value = true))
       // Canvas
       const canvas = ref<any>(null)
-      const view = useStorage('view-dashboard', {
-        translate: {
-          x: 0,
-          y: 0,
-        },
-        scale: 1,
-      })
 
       const scrollEvent = (e: WheelEvent | any) => {
-        const xs = (e.clientX - view.value.translate.x) / view.value.scale
-        const ys = (e.clientY - view.value.translate.y) / view.value.scale
+        if (!state.dashboardZoomable) return
+        const xs =
+          (e.clientX - state.dashboardView.translate.x) /
+          state.dashboardView.scale
+        const ys =
+          (e.clientY - state.dashboardView.translate.y) /
+          state.dashboardView.scale
         const delta: number = e.wheelData ? e.wheelData : -e.deltaY
         if (delta > 0) {
-          if (view.value.scale <= 3) view.value.scale *= 1.1
+          if (state.dashboardView.scale <= 3) state.dashboardView.scale *= 1.1
         } else {
-          if (view.value.scale >= 0.5) view.value.scale /= 1.1
+          if (state.dashboardView.scale >= 0.5) state.dashboardView.scale /= 1.1
         }
-        view.value.translate.x = e.clientX - xs * view.value.scale
-        view.value.translate.y = e.clientY - ys * view.value.scale
+        state.dashboardView.translate.x =
+          e.clientX - xs * state.dashboardView.scale
+        state.dashboardView.translate.y =
+          e.clientY - ys * state.dashboardView.scale
       }
 
       const isDragging = ref(false)
@@ -76,8 +82,8 @@
       const dragEvent = (e: MouseEvent) => {
         const movX = e.movementX
         const movY = e.movementY
-        view.value.translate.x += movX
-        view.value.translate.y += movY
+        state.dashboardView.translate.x += movX
+        state.dashboardView.translate.y += movY
       }
       const dragEnd = (e: MouseEvent) => {
         isDragging.value = false
@@ -86,7 +92,7 @@
       }
 
       const transformation = computed(() => {
-        return `matrix(${view.value.scale},0,0,${view.value.scale},${view.value.translate.x},${view.value.translate.y})`
+        return `matrix(${state.dashboardView.scale},0,0,${state.dashboardView.scale},${state.dashboardView.translate.x},${state.dashboardView.translate.y})`
       })
       const transformOrigin = computed(() => {
         return `0 0`
@@ -98,7 +104,6 @@
         state,
 
         canvas,
-        view,
         isDragging,
         isDraggingChild,
         scrollEvent,
