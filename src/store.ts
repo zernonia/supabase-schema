@@ -44,6 +44,7 @@ export const state = reactive({
     // console.log(tableGroup, state.tables)
     state.tables = tableGroup
   },
+  tableSelected: new Set<Element>(),
   dashboardZoomable: true,
   dashboardView: useStorage('view-dashboard', {
     translate: {
@@ -58,6 +59,7 @@ export const state = reactive({
       y,
     }
   },
+  isEditing: false,
   visuals: useStorage('visual-list', {} as VisualState),
   clearVisual: () => {
     for (var member in state.visuals) delete state.visuals[member]

@@ -1,6 +1,6 @@
 <template>
   <menu
-    class="absolute z-1000 top-20 m-0 p-0 w-90 rounded-md border border-dark-border transition-right duration-500 ease-in-out"
+    class="absolute z-1000 top-20 m-0 p-0 w-90 rounded-md border-2 border-dark-border transition-right duration-500 ease-in-out"
     :style="{ right: positionPanel }"
   >
     <div class="relative bg-dark-800 p-6 rounded-md">
@@ -71,7 +71,7 @@
       </form>
       <!-- arrow  -->
       <div
-        class="-left-3.95rem -top-1px absolute p-3 rounded-md bg-dark-800 border-l border-t border-b border-dark-border cursor-pointer opacity-50 hover:opacity-100 hover:bg-dark-600"
+        class="-left-3.95rem -top-1px absolute p-3 rounded-md bg-dark-800 border-2 border-dark-border cursor-pointer opacity-50 hover:opacity-100 hover:bg-dark-600"
         @click="togglePanel = !togglePanel"
       >
         <i-majesticons:cog-line></i-majesticons:cog-line>

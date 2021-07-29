@@ -1,6 +1,6 @@
 <template>
   <menu
-    class="absolute z-1000 top-5 right-5 m-0 p-0 rounded-md border border-dark-border opacity-50 hover:opacity-100"
+    class="absolute z-1000 top-5 right-5 m-0 p-0 rounded-md border-2 border-dark-border opacity-50 hover:opacity-100"
   >
     <div class="relative bg-dark-800 rounded-bl-md">
       <div class="flex flex-row">

@@ -81,6 +81,7 @@
               font: {
                 size: 14,
               },
+              precision: 0,
             },
           },
         },
