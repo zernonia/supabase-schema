@@ -75,22 +75,6 @@
       const position = computed(
         () => state.tables[`${table.value.title}`].position
       ) // position
-      const index = computed(() =>
-        Object.keys(state.tables).findIndex(
-          (item: any) => item == table.value.title
-        )
-      )
-      // First mount
-      onBeforeMount(() => {
-        if (position.value.x == 0 && position.value.y == 0) {
-          autoArrange()
-        }
-      })
-
-      const autoArrange = () => {
-        position.value.x = (index.value % 3) * 300 + 50
-        position.value.y = Math.floor(index.value / 3) * 300 + 50
-      }
 
       // Dragging Event
       const tablesSelected = ref<any>({})

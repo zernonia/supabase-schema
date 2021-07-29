@@ -81,7 +81,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, ref, onMounted, watch } from 'vue'
+  import {
+    defineComponent,
+    computed,
+    ref,
+    onMounted,
+    watch,
+    nextTick,
+  } from 'vue'
   import { useStorage } from '@vueuse/core'
   import { state, supabaseClientState } from '../store'
   import Logo from '../assets/logo.svg'
@@ -111,6 +118,9 @@
                   if (data.definitions) {
                     definition.value = data.definitions
                     state.setTables(definition.value)
+                    nextTick(() => {
+                      state.autoArrange()
+                    })
                   }
                   emit('fetch', false)
                 })

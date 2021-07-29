@@ -3,7 +3,7 @@
     class="w-screen h-screen relative bg-dark-900 text-white overflow-hidden"
   >
     <router-view></router-view>
-    <Navigation></Navigation>
+    <!-- <Navigation></Navigation> -->
     <Settings></Settings>
   </main>
   <Loading v-if="isFetching"></Loading>

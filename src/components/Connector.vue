@@ -52,9 +52,13 @@
         y: 0,
       })
 
-      watch([positionStart, positionEnd], () => {
-        drawSVG()
-      })
+      watch(
+        [positionStart, positionEnd],
+        () => {
+          drawSVG()
+        },
+        { deep: true }
+      )
 
       const path = ref<SVGClipPathElement | null>(null)
 

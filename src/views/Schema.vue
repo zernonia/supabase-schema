@@ -1,37 +1,40 @@
 <template>
-  <SelectionArea
-    class="container"
-    :options="{ selectables: 'div.selectable' }"
-    :on-move="onMove"
-    :on-start="onStart"
-    :on-before-start="onBeforeStart"
-  >
-    <div
-      id="screen-canvas"
-      class="w-screen h-screen relative overflow-hidden"
-      @wheel="scrollEvent"
-      @mousedown="dragStart"
-      @mouseup="isDragging = false"
+  <div>
+    <AutoArrange />
+    <SelectionArea
+      class="container"
+      :options="{ selectables: 'div.selectable' }"
+      :on-move="onMove"
+      :on-start="onStart"
+      :on-before-start="onBeforeStart"
     >
       <div
-        id="canvas"
-        ref="canvas"
-        :style="{ transformOrigin, transform: transformation }"
-        class="absolute select-none relative boxes"
+        id="screen-canvas"
+        class="w-screen h-screen relative overflow-hidden"
+        @wheel="scrollEvent"
+        @mousedown="dragStart"
+        @mouseup="isDragging = false"
       >
-        <div id="canvas-children">
-          <Table
-            v-for="table in state.tables"
-            :key="table.title"
-            :table="table"
-            :scale="view.scale"
-            :mounted="isMounted"
-            @table-dragging="isDraggingChild = $event"
-          />
+        <div
+          id="canvas"
+          ref="canvas"
+          :style="{ transformOrigin, transform: transformation }"
+          class="absolute select-none relative boxes"
+        >
+          <div id="canvas-children">
+            <Table
+              v-for="table in state.tables"
+              :key="table.title"
+              :table="table"
+              :scale="view.scale"
+              :mounted="isMounted"
+              @table-dragging="isDraggingChild = $event"
+            />
+          </div>
         </div>
       </div>
-    </div>
-  </SelectionArea>
+    </SelectionArea>
+  </div>
 </template>
 
 <script lang="ts">

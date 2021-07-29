@@ -44,6 +44,47 @@ export const state = reactive({
     // console.log(tableGroup, state.tables)
     state.tables = tableGroup
   },
+  autoArrange: () => {
+    const gap = 250 // gap beween each table
+    const column = 3
+    const minWidth: number[] = []
+    const minHeight: number[] = []
+    const nodeList: NodeListOf<HTMLElement> = document.querySelectorAll(
+      '#canvas-children > div'
+    )
+    nodeList.forEach((el, index) => {
+      if (minWidth[index % column]) {
+        minWidth[index % column] < el.offsetWidth
+          ? (minWidth[index % column] = minWidth[index % column])
+          : ''
+      } else {
+        minWidth[index % column] = el.offsetWidth
+      }
+      if (minHeight[Math.floor(index / column)]) {
+        minHeight[Math.floor(index / column)] < el.offsetHeight
+          ? (minHeight[Math.floor(index / column)] =
+              minHeight[Math.floor(index / column)])
+          : ''
+      } else {
+        minHeight[Math.floor(index / column)] = el.offsetHeight
+      }
+    })
+
+    minWidth.unshift(0)
+    minHeight.unshift(0)
+
+    const setLeft = minWidth.map((elem, index) =>
+      minWidth.slice(0, index + 1).reduce((a, b) => a + b + gap)
+    )
+    const setTop = minHeight.map((elem, index) =>
+      minHeight.slice(0, index + 1).reduce((a, b) => a + b + gap)
+    )
+
+    nodeList.forEach((el, index) => {
+      state.tables[el.id].position.x = setLeft[index % column]
+      state.tables[el.id].position.y = setTop[Math.floor(index / column)]
+    })
+  },
   tableSelected: new Set<Element>(),
   dashboardZoomable: true,
   dashboardView: useStorage('view-dashboard', {
