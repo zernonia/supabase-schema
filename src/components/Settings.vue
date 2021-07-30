@@ -70,12 +70,13 @@
         <span class="text-sm text-white-900">{{ error }}</span>
       </form>
       <!-- arrow  -->
-      <div
-        class="-left-3.95rem -top-1px absolute p-3 rounded-md bg-dark-800 border-2 border-dark-border cursor-pointer opacity-50 hover:opacity-100 hover:bg-dark-600"
+      <button
+        v-tooltip:left.tooltip="'Settings'"
+        class="-left-3.95rem -top-1px !absolute p-3 rounded-md bg-dark-800 border-2 border-dark-border cursor-pointer opacity-50 hover:opacity-100 hover:bg-dark-600 focus:outline-none"
         @click="togglePanel = !togglePanel"
       >
         <i-majesticons:cog-line></i-majesticons:cog-line>
-      </div>
+      </button>
     </div>
   </menu>
 </template>
@@ -117,6 +118,7 @@
                 res.json().then((data) => {
                   if (data.definitions) {
                     definition.value = data.definitions
+                    state.tables = {}
                     state.setTables(definition.value)
                     nextTick(() => {
                       state.autoArrange()

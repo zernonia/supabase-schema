@@ -49,12 +49,20 @@
 
       const tableName = computed(() => id.value.split('.')[0])
       const tableTargetName = computed(() => target.value.split('.')[0])
-      const positionStart = computed(
-        () => state.tables[`${tableName.value}`].position
-      )
-      const positionEnd = computed(
-        () => state.tables[`${tableTargetName.value}`].position
-      )
+      const positionStart = computed(() => {
+        if (state.tables[`${tableName.value}`]) {
+          return state.tables[`${tableName.value}`].position
+        } else {
+          return { x: 0, y: 0 }
+        }
+      })
+      const positionEnd = computed(() => {
+        if (state.tables[`${tableTargetName.value}`]) {
+          return state.tables[`${tableTargetName.value}`].position
+        } else {
+          return { x: 0, y: 0 }
+        }
+      })
 
       const fkPos = ref({
         x: 0,

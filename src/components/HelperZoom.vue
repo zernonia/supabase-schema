@@ -3,6 +3,7 @@
     class="flex items-center border-2 bg-dark-800 border-dark-border rounded-md opacity-50 hover:opacity-100"
   >
     <button
+      v-tooltip="'Zoom out'"
       @click="updateView('minus')"
       class="p-3 hover:bg-dark-600 focus:outline-none"
     >
@@ -12,6 +13,7 @@
       {{ (state.schemaView.scale * 100).toFixed(0) }}%
     </p>
     <button
+      v-tooltip="'Zoom in'"
       @click="updateView('plus')"
       class="p-3 hover:bg-dark-600 focus:outline-none"
     >

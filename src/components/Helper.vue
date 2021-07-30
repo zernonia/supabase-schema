@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center space-x-3 right-3.95 bottom-5 absolute z-10">
-    <HelperScreenshot @click="screenshot" />
-    <HelperAutoArrange @click="autoArrange" />
-    <HelperFocus @click="focusView" />
+    <HelperScreenshot v-tooltip="'Take a screenshot'" @click="screenshot" />
+    <HelperAutoArrange v-tooltip="'Auto arrange'" @click="autoArrange" />
+    <HelperFocus v-tooltip="'Focus everything center'" @click="focusView" />
     <HelperZoom />
   </div>
 </template>
