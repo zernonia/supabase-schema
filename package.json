@@ -13,6 +13,7 @@
     "@vueuse/core": "^4.9.1",
     "chart.js": "^3.5.0",
     "d3": "^6.7.0",
+    "html-to-image": "^1.7.0",
     "vue": "^3.0.11",
     "vue-chart-3": "^0.4.10",
     "vue-router": "4"

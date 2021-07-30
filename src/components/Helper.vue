@@ -1,5 +1,6 @@
 <template>
   <div class="flex items-center space-x-3 right-3.95 bottom-5 absolute z-10">
+    <HelperScreenshot @click="screenshot" />
     <HelperAutoArrange @click="autoArrange" />
     <HelperFocus @click="focusView" />
     <HelperZoom />
@@ -9,6 +10,7 @@
 <script lang="ts">
   import { defineComponent, nextTick, watch } from 'vue'
   import { state } from '../store'
+  import { toPng } from 'html-to-image'
 
   export default defineComponent({
     setup() {
@@ -47,10 +49,28 @@
         state.schemaView.translate.y = translateY
       }
 
+      const screenshot = () => {
+        const el = document.getElementById('screen-canvas') as HTMLElement
+        toPng(el).then((dataUrl) => {
+          var link = document.createElement('a')
+          link.download = 'Supbase Schema.png'
+          link.href = dataUrl
+          link.click()
+        })
+        // html2canvas(el).then((canvas) => {
+        //   var image = canvas.toDataURL()
+        //   var link = document.createElement('a')
+        //   link.download = 'Supbase Schema.png'
+        //   link.href = image
+        //   link.click()
+        // })
+      }
+
       return {
         state,
         autoArrange,
         focusView,
+        screenshot,
       }
     },
   })
