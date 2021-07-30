@@ -1,6 +1,6 @@
 <template>
   <menu
-    class="absolute z-1000 top-20 m-0 p-0 w-90 rounded-md border-2 border-dark-border transition-right duration-500 ease-in-out"
+    class="absolute z-1000 top-5 m-0 p-0 w-90 rounded-md border-2 border-dark-border transition-right duration-500 ease-in-out"
     :style="{ right: positionPanel }"
   >
     <div class="relative bg-dark-800 p-6 rounded-md">

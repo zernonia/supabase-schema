@@ -1,11 +1,21 @@
 <template>
-  <svg class="absolute z-10 opacity-50" :id="svg" width="0" height="0">
+  <svg
+    class="absolute z-10"
+    :id="svg"
+    width="0"
+    height="0"
+    pointer-events="none"
+  >
     <path
       ref="path"
-      class="stroke-white fill-transparent"
-      style="stroke-width: 3px; pointer-event: stroke"
+      class="fill-transparent"
+      :stroke="isHover ? 'rgb(16, 185, 129)' : 'rgba(255,255,255,0.5)'"
+      pointer-events="visibleStroke"
+      style="stroke-width: 3px"
+      @mouseenter="isHover = true"
+      @mouseleave="isHover = false"
     ></path>
-    <circle :cx="fkPos.x" :cy="fkPos.y" r="5" class="stroke-white fill-current">
+    <circle :cx="fkPos.x" :cy="fkPos.y" r="7" class="stroke-white fill-current">
       fk
     </circle>
   </svg>
@@ -13,7 +23,6 @@
 
 <script lang="ts">
   import { state } from '../store'
-
   import { computed, defineComponent, onMounted, ref, toRefs, watch } from 'vue'
 
   export default defineComponent({
@@ -31,7 +40,7 @@
         required: true,
       },
     },
-    setup(prop) {
+    setup(prop, { emit }) {
       const { svg, id, target } = toRefs(prop)
 
       onMounted(() => {
@@ -140,16 +149,28 @@
         svgElem.setAttribute('width', `${Math.abs(posDiffX) + 40}`)
         svgElem.setAttribute('height', `${Math.abs(posDiffY) + 20}`)
 
-        fkPos.value.x = posEndX - posSvgX
+        fkPos.value.x = posEndX - posSvgX + 2
         fkPos.value.y = posEndY - posSvgY + 10
       }
 
+      const isHover = ref(false)
+      watch(
+        () => state.tableHighlighted,
+        (n) => {
+          if (!n) {
+            isHover.value = false
+          } else if (tableName.value == n || tableTargetName.value == n) {
+            isHover.value = true
+          }
+        }
+      )
+
       return {
+        state,
         path,
         fkPos,
+        isHover,
       }
     },
   })
 </script>
-
-<style></style>

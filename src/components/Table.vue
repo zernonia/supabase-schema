@@ -5,9 +5,11 @@
     :style="{ top: position.y + 'px', left: position.x + 'px' }"
     style="cursor: grab"
     @mousedown.prevent="dragStart"
+    @mouseenter="isHover = true"
+    @mouseleave="isHover = false"
   >
     <h5
-      class="py-2 pb-3 px-2 bg-dark-800 font-medium text-lg text-center border-b border-dark-border"
+      class="py-2 pb-3 px-2 bg-dark-800 font-medium text-lg text-center border-b-2 border-dark-border"
     >
       {{ table?.title }}
     </h5>
@@ -45,6 +47,7 @@
     onMounted,
     PropType,
     ref,
+    watch,
   } from 'vue'
   import { Table } from '../interface'
   import Connector from './Connector.vue'
@@ -126,6 +129,16 @@
         if (supabaseClientState.apikey.url == '') localStorage.clear()
       })
 
+      // hover table to highlight connection
+      const isHover = ref(false)
+      watch(isHover, (n) => {
+        if (n) {
+          state.tableHighlighted = table.value.title
+        } else {
+          state.tableHighlighted = ''
+        }
+      })
+
       return {
         isDragging,
         dragStart,
@@ -133,6 +146,8 @@
         dragEnd,
         state,
         position,
+
+        isHover,
       }
     },
   })

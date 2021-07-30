@@ -86,6 +86,16 @@ export const state = reactive({
     })
   },
   tableSelected: new Set<Element>(),
+  tableHighlighted: '',
+  connectorHighlighted: [],
+  schemaView: useStorage('view', {
+    translate: {
+      x: 0,
+      y: 0,
+    },
+    scale: 1,
+  }),
+
   dashboardZoomable: true,
   dashboardView: useStorage('view-dashboard', {
     translate: {

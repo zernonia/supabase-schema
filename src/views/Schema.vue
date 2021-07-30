@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AutoArrange />
+    <Helper />
     <SelectionArea
       class="container"
       :options="{ selectables: 'div.selectable' }"
@@ -11,6 +11,7 @@
       <div
         id="screen-canvas"
         class="w-screen h-screen relative overflow-hidden"
+        :style="{ cursor: isDragging ? 'grabbing' : 'default' }"
         @wheel="scrollEvent"
         @mousedown="dragStart"
         @mouseup="isDragging = false"
@@ -26,7 +27,7 @@
               v-for="table in state.tables"
               :key="table.title"
               :table="table"
-              :scale="view.scale"
+              :scale="state.schemaView.scale"
               :mounted="isMounted"
               @table-dragging="isDraggingChild = $event"
             />
@@ -38,8 +39,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, ref, onMounted, watch } from 'vue'
-  import { useStorage } from '@vueuse/core'
+  import { defineComponent, computed, ref, onMounted } from 'vue'
   import SelectionArea, { SelectionEvent } from '@viselect/vue'
   import { state } from '../store'
 
@@ -53,26 +53,21 @@
       onMounted(() => (isMounted.value = true))
       // Canvas
       const canvas = ref<any>(null)
-      const view = useStorage('view', {
-        translate: {
-          x: 0,
-          y: 0,
-        },
-        scale: 1,
-      })
 
       const scrollEvent = (e: WheelEvent | any) => {
         if (isDraggingChild.value) return
-        const xs = (e.clientX - view.value.translate.x) / view.value.scale
-        const ys = (e.clientY - view.value.translate.y) / view.value.scale
+        const xs =
+          (e.clientX - state.schemaView.translate.x) / state.schemaView.scale
+        const ys =
+          (e.clientY - state.schemaView.translate.y) / state.schemaView.scale
         const delta: number = e.wheelData ? e.wheelData : -e.deltaY
         if (delta > 0) {
-          if (view.value.scale <= 3) view.value.scale *= 1.1
+          if (state.schemaView.scale <= 3) state.schemaView.scale *= 1.1
         } else {
-          if (view.value.scale >= 0.5) view.value.scale /= 1.1
+          if (state.schemaView.scale >= 0.5) state.schemaView.scale /= 1.1
         }
-        view.value.translate.x = e.clientX - xs * view.value.scale
-        view.value.translate.y = e.clientY - ys * view.value.scale
+        state.schemaView.translate.x = e.clientX - xs * state.schemaView.scale
+        state.schemaView.translate.y = e.clientY - ys * state.schemaView.scale
       }
 
       const isDragging = ref(false)
@@ -86,8 +81,8 @@
       const dragEvent = (e: MouseEvent) => {
         const movX = e.movementX
         const movY = e.movementY
-        view.value.translate.x += movX
-        view.value.translate.y += movY
+        state.schemaView.translate.x += movX
+        state.schemaView.translate.y += movY
       }
       const dragEnd = (e: MouseEvent) => {
         isDragging.value = false
@@ -96,7 +91,7 @@
       }
 
       const transformation = computed(() => {
-        return `matrix(${view.value.scale},0,0,${view.value.scale},${view.value.translate.x},${view.value.translate.y})`
+        return `matrix(${state.schemaView.scale},0,0,${state.schemaView.scale},${state.schemaView.translate.x},${state.schemaView.translate.y})`
       })
       const transformOrigin = computed(() => {
         return `0 0`
@@ -144,7 +139,6 @@
         state,
 
         canvas,
-        view,
         isDragging,
         isDraggingChild,
         scrollEvent,
