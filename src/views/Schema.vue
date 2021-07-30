@@ -164,4 +164,7 @@
   .selected {
     @apply border-green-500;
   }
+  .container {
+    @apply !max-w-none;
+  }
 </style>
