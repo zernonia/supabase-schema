@@ -5,7 +5,7 @@
     <button
       v-tooltip="'Zoom out'"
       @click="updateView('minus')"
-      class="p-3 hover:bg-dark-600 focus:outline-none"
+      class="p-3 flex hover:bg-dark-600 focus:outline-none"
     >
       <i-heroicons-solid:minus-sm></i-heroicons-solid:minus-sm>
     </button>
@@ -15,7 +15,7 @@
     <button
       v-tooltip="'Zoom in'"
       @click="updateView('plus')"
-      class="p-3 hover:bg-dark-600 focus:outline-none"
+      class="p-3 flex hover:bg-dark-600 focus:outline-none"
     >
       <i-heroicons-solid:plus-sm></i-heroicons-solid:plus-sm>
     </button>

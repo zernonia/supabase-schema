@@ -124,11 +124,6 @@
         document.onmouseup = null
       }
 
-      // clear previous v1 localstorage
-      onMounted(() => {
-        if (supabaseClientState.apikey.url == '') localStorage.clear()
-      })
-
       // hover table to highlight connection
       const isHover = ref(false)
       watch(isHover, (n) => {

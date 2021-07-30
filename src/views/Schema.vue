@@ -41,7 +41,7 @@
 <script lang="ts">
   import { defineComponent, computed, ref, onMounted } from 'vue'
   import SelectionArea, { SelectionEvent } from '@viselect/vue'
-  import { state } from '../store'
+  import { state, supabaseClientState } from '../store'
 
   export default defineComponent({
     components: {
@@ -132,6 +132,14 @@
           el.classList.remove('selected')
         }
       }
+
+      // clear previous v1 localstorage
+      onMounted(() => {
+        if (localStorage.getItem('url') != null) {
+          localStorage.clear()
+          location.reload()
+        }
+      })
 
       return {
         isMounted,
