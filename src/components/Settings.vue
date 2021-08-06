@@ -1,9 +1,9 @@
 <template>
   <menu
-    class="absolute z-1000 top-10 m-0 p-0 w-90 rounded-bl-md border border-dark-border transition-right duration-500 ease-in-out"
+    class="absolute z-1000 top-5 m-0 p-0 w-90 rounded-md border-2 border-dark-border transition-right duration-500 ease-in-out"
     :style="{ right: positionPanel }"
   >
-    <div class="relative bg-dark-800 p-6 rounded-bl-md">
+    <div class="relative bg-dark-800 p-6 rounded-md">
       <div class="w-full flex justify-center">
         <img :src="Logo" class="h-32" alt="" />
       </div>
@@ -18,13 +18,13 @@
           ></i-mdi-github>
         </a>
       </h1>
-      <h6 class="text-dark-500 font-semibold text-sm">
+      <h6 class="text-dark-500 font-medium text-sm">
         Open Source • LocalStorage
       </h6>
       <div class="mt-4">
         <details :open="true">
-          <summary class="font-semibold uppercase">Steps</summary>
-          <ol class="mt-2 text-snow ml-8 list-decimal leading-tight">
+          <summary class="font-medium uppercase">Steps</summary>
+          <ol class="mt-2 text-white-700 ml-8 list-decimal leading-tight">
             <li class="py-2">
               Obtain OpenAPI URL following instruction
               <a
@@ -40,30 +40,28 @@
         </details>
       </div>
       <form class="flex flex-col mt-4">
-        <label for="website" class="mr-2 text-sm font-semibold uppercase"
+        <label for="website" class="mr-2 text-sm font-medium uppercase"
           >Url</label
         >
-        <input
+        <InputText
           type="text"
           name="url"
           placeholder="https://your-project.supabase.co"
-          v-model="url"
-          class="bg-dark-900 placeholder-dark-500 mr-2 rounded-md px-4 py-2 h-10 flex-grow border-dark-border focus:border-green-500 focus:ring-green-500"
+          v-model="supabaseClientState.apikey.url"
         />
-        <label for="anon" class="mr-2 mt-2 text-sm font-semibold uppercase"
+        <label for="anon" class="mr-2 mt-2 text-sm font-medium uppercase"
           >API Keys</label
         >
-        <input
+        <InputText
           type="text"
           name="anon"
           placeholder="your-anon-key"
-          v-model="anon"
+          v-model="supabaseClientState.apikey.anon"
           @keyup.enter="fetchData"
-          class="bg-dark-900 placeholder-dark-500 mr-2 rounded-md px-4 py-2 h-10 flex-grow border-dark-border focus:border-green-500 focus:ring-green-500"
         />
         <div class="flex justify-end mt-4">
           <button
-            class="bg-green-500 rounded-md px-4 py-0 h-8 text-sm font-semibold hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600"
+            class="bg-green-500 rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600"
             @click.prevent="fetchData"
           >
             Fetch
@@ -72,21 +70,21 @@
         <span class="text-sm text-white-900">{{ error }}</span>
       </form>
       <!-- arrow  -->
-      <div
-        class="-left-2.7rem -top-1px absolute p-3 rounded-l-md bg-dark-800 border-l border-t border-b border-dark-border cursor-pointer hover:bg-dark-600"
+      <button
+        v-tooltip:left.tooltip="'Settings'"
+        class="-left-3.95rem -top-1px !absolute btn"
         @click="togglePanel = !togglePanel"
       >
-        <i-bx-bxs-right-arrow class="p-3px"></i-bx-bxs-right-arrow>
-      </div>
+        <i-majesticons:cog-line></i-majesticons:cog-line>
+      </button>
     </div>
   </menu>
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, ref, onMounted } from 'vue'
+  import { defineComponent, computed, ref, nextTick } from 'vue'
   import { useStorage } from '@vueuse/core'
-  import { Table, Column } from '../interface'
-  import { state } from '../store'
+  import { state, supabaseClientState } from '../store'
   import Logo from '../assets/logo.svg'
 
   export default defineComponent({
@@ -95,46 +93,9 @@
       // Form fetch data
       const definition = useStorage('definitions', {})
       const title = ref('Supabase Schema')
-      const url = useStorage('url', '')
-      const anon = useStorage('anon', '')
+      const url = computed(() => supabaseClientState.apikey.url)
+      const anon = computed(() => supabaseClientState.apikey.anon)
       const error = ref('')
-
-      state.tables = computed(() => {
-        let tableGroup: Table[] = []
-        let key: string
-        let value: any
-        for ([key, value] of Object.entries(definition.value)) {
-          let colGroup: Column[] = []
-          Object.keys(value.properties).forEach((colKey: string) => {
-            // Looping every Column
-            const colVal = value.properties[colKey]
-            let col: Column = {
-              title: colKey,
-              format: colVal.format.split(' ')[0],
-              type: colVal.type,
-              default: colVal.default ? colVal.default : undefined,
-              required:
-                value.required && value.required?.includes(colKey)
-                  ? true
-                  : false,
-              pk:
-                colVal.description && colVal.description?.includes('<pk/>')
-                  ? true
-                  : false,
-              fk: colVal.description
-                ? colVal.description.split('`')[1]
-                : undefined,
-            }
-            colGroup.push(col)
-          })
-          // Push every table
-          tableGroup.push({
-            title: key,
-            columns: colGroup,
-          })
-        }
-        return tableGroup
-      })
 
       const fetchData = () => {
         if (!url.value || !anon.value) return
@@ -150,6 +111,11 @@
                 res.json().then((data) => {
                   if (data.definitions) {
                     definition.value = data.definitions
+                    state.tables = {}
+                    state.setTables(definition.value)
+                    nextTick(() => {
+                      state.autoArrange()
+                    })
                   }
                   emit('fetch', false)
                 })
@@ -178,7 +144,7 @@
       // toggle Panel
       const togglePanel = useStorage('togglePanel', true)
       const positionPanel = computed(() => {
-        return togglePanel.value ? '0' : '-22.5rem'
+        return togglePanel.value ? '1.25rem' : '-22.5rem'
       })
 
       return {
@@ -191,6 +157,7 @@
         clearStorage,
         togglePanel,
         positionPanel,
+        supabaseClientState,
       }
     },
   })

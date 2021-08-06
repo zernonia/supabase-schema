@@ -1,11 +1,15 @@
 <template>
   <div
-    class="pb-2 absolute z-20 box rounded-md overflow-hidden bg-dark-700 border border-dark-border hover:border-green-500 cursor-pointer"
+    :id="table.title"
+    class="selectable pb-2 absolute z-20 box rounded-md overflow-hidden bg-dark-700 border-2 border-dark-border hover:border-green-500"
     :style="{ top: position.y + 'px', left: position.x + 'px' }"
+    style="cursor: grab"
     @mousedown.prevent="dragStart"
+    @mouseenter="isHover = true"
+    @mouseleave="isHover = false"
   >
     <h5
-      class="py-2 pb-3 px-2 bg-dark-800 font-semibold text-lg text-center border-b border-dark-border"
+      class="py-2 pb-3 px-2 bg-dark-800 font-medium text-lg text-center border-b-2 border-dark-border"
     >
       {{ table?.title }}
     </h5>
@@ -18,7 +22,7 @@
         <p class="flex-grow">
           {{ col.title }}
         </p>
-        <p class="ml-8 flex-grow-0 text-sm text-white-900">
+        <p class="ml-10 flex-grow-0 text-sm text-white-900">
           {{ col.format }}
         </p>
       </div>
@@ -36,17 +40,28 @@
 
 <script lang="ts">
   import { toRefs } from '@vueuse/core'
-  import { computed, defineComponent, onBeforeMount, PropType, ref } from 'vue'
+  import {
+    computed,
+    defineComponent,
+    onBeforeMount,
+    onMounted,
+    PropType,
+    ref,
+    watch,
+  } from 'vue'
   import { Table } from '../interface'
   import Connector from './Connector.vue'
-  import { state } from '../store'
+  import { state, supabaseClientState } from '../store'
 
   export default defineComponent({
     components: {
       Connector,
     },
     props: {
-      table: Object as PropType<Table>,
+      table: {
+        type: Object as PropType<Table>,
+        required: true,
+      },
       scale: {
         type: Number,
         required: true,
@@ -60,45 +75,64 @@
       const ix = ref(0) //initial
       const iy = ref(0)
 
-      state.getTable(`${table?.value?.title}`)
-      const position = computed(() => state[`${table?.value?.title}`]) // position
-      const index = computed(() =>
-        state.tables.findIndex((item: any) => item.title == table?.value?.title)
-      )
-      // First mount
-      onBeforeMount(() => {
-        if (position.value.x == 0 && position.value.y == 0) {
-          autoArrange()
-        }
-      })
-
-      const autoArrange = () => {
-        position.value.x = (index.value % 3) * 300 + 50
-        position.value.y = Math.floor(index.value / 3) * 300 + 50
-      }
+      const position = computed(
+        () => state.tables[`${table.value.title}`].position
+      ) // position
 
       // Dragging Event
+      const tablesSelected = ref<any>({})
       const dragStart = (e: MouseEvent) => {
+        if (e.which != 1) return
         emit('tableDragging', true)
         isDragging.value = true
-        ix.value = e.clientX - position.value.x * scale.value
-        iy.value = e.clientY - position.value.y * scale.value
         document.onmousemove = dragEvent
         document.onmouseup = dragEnd
+
+        if (state.tableSelected.size) {
+          state.tableSelected.forEach((el) => {
+            tablesSelected.value[el.id] = {
+              ix: e.clientX - state.tables[el.id].position.x * scale.value,
+              iy: e.clientY - state.tables[el.id].position.y * scale.value,
+            }
+          })
+        } else {
+          ix.value = e.clientX - position.value.x * scale.value
+          iy.value = e.clientY - position.value.y * scale.value
+        }
       }
       const dragEvent = (e: MouseEvent) => {
         if (!isDragging) return
-        state[`${table?.value?.title}`] = {
-          x: (e.clientX - ix.value) / scale.value,
-          y: (e.clientY - iy.value) / scale.value,
+        if (state.tableSelected.size) {
+          state.tableSelected.forEach((el) => {
+            state.tables[el.id].position = {
+              x: (e.clientX - tablesSelected.value[el.id].ix) / scale.value,
+              y: (e.clientY - tablesSelected.value[el.id].iy) / scale.value,
+            }
+          })
+        } else {
+          state.tables[`${table.value.title}`].position = {
+            x: (e.clientX - ix.value) / scale.value,
+            y: (e.clientY - iy.value) / scale.value,
+          }
         }
       }
       const dragEnd = (e: MouseEvent) => {
         emit('tableDragging', false)
+        tablesSelected.value = {}
         isDragging.value = false
         document.onmousemove = null
         document.onmouseup = null
       }
+
+      // hover table to highlight connection
+      const isHover = ref(false)
+      watch(isHover, (n) => {
+        if (n) {
+          state.tableHighlighted = table.value.title
+        } else {
+          state.tableHighlighted = ''
+        }
+      })
 
       return {
         isDragging,
@@ -107,6 +141,8 @@
         dragEnd,
         state,
         position,
+
+        isHover,
       }
     },
   })

@@ -1,0 +1,51 @@
+@font-face {
+  font-family: custom-font;
+  font-weight: 500;
+  font-style: normal;
+  src: url(./fonts/CustomFont-Medium.woff2) format('woff2');
+}
+
+html {
+  font-family: custom-font, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica,
+    Arial, sans-serif;
+}
+
+input[type='color'] {
+  -webkit-appearance: none;
+  border: none;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type='color']::-webkit-color-swatch {
+  border: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2a2a;
+}
+
+.btn {
+  @apply p-3 flex rounded-md bg-dark-800 border-2 border-dark-border cursor-pointer opacity-50 hover:opacity-100 hover:bg-dark-600 focus:outline-none transition duration-300 ease-in;
+}

@@ -3,15 +3,24 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
+    "test": "vue-tsc --noEmit",
     "serve": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.11.14",
+    "@viselect/vue": "^3.0.0-beta.8",
     "@vueuse/core": "^4.9.1",
-    "vue": "^3.0.11"
+    "chart.js": "^3.5.0",
+    "d3": "^6.7.0",
+    "html-to-image": "^1.7.0",
+    "vue": "^3.0.11",
+    "vue-chart-3": "^0.4.10",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@iconify/json": "^1.1.339",
+    "@types/d3": "^6.6.0",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
     "@vitejs/plugin-vue": "^1.2.2",
