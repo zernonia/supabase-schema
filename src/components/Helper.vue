@@ -1,5 +1,6 @@
 <template>
   <div class="flex items-center space-x-3 right-3.95 bottom-5 absolute z-10">
+    <!-- <HelperExport v-tooltip="'Export SQL'" @click="exportSQL" /> -->
     <HelperScreenshot v-tooltip="'Take a screenshot'" @click="screenshot" />
     <HelperAutoArrange v-tooltip="'Auto arrange'" @click="autoArrange" />
     <HelperFocus v-tooltip="'Focus everything center'" @click="focusView" />
@@ -57,13 +58,10 @@
           link.href = dataUrl
           link.click()
         })
-        // html2canvas(el).then((canvas) => {
-        //   var image = canvas.toDataURL()
-        //   var link = document.createElement('a')
-        //   link.download = 'Supbase Schema.png'
-        //   link.href = image
-        //   link.click()
-        // })
+      }
+
+      const exportSQL = () => {
+        console.log(state.tables)
       }
 
       return {
@@ -71,6 +69,7 @@
         autoArrange,
         focusView,
         screenshot,
+        exportSQL,
       }
     },
   })

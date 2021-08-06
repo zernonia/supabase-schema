@@ -72,7 +72,7 @@
       <!-- arrow  -->
       <button
         v-tooltip:left.tooltip="'Settings'"
-        class="-left-3.95rem -top-1px !absolute p-3 flex rounded-md bg-dark-800 border-2 border-dark-border cursor-pointer opacity-50 hover:opacity-100 hover:bg-dark-600 focus:outline-none"
+        class="-left-3.95rem -top-1px !absolute btn"
         @click="togglePanel = !togglePanel"
       >
         <i-majesticons:cog-line></i-majesticons:cog-line>
@@ -82,14 +82,7 @@
 </template>
 
 <script lang="ts">
-  import {
-    defineComponent,
-    computed,
-    ref,
-    onMounted,
-    watch,
-    nextTick,
-  } from 'vue'
+  import { defineComponent, computed, ref, nextTick } from 'vue'
   import { useStorage } from '@vueuse/core'
   import { state, supabaseClientState } from '../store'
   import Logo from '../assets/logo.svg'
