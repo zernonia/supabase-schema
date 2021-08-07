@@ -2,7 +2,7 @@
   <teleport to="body">
     <div
       v-if="open"
-      class="w-screen h-screen fixed top-0 left-0 flex items-center justify-center"
+      class="w-screen h-screen fixed top-0 left-0 flex items-center justify-center bg-dark-900 bg-opacity-50"
     >
       <div
         ref="target"
