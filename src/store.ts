@@ -4,6 +4,7 @@ import { Table, Column, TableState, VisualState } from './interface'
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 export const state = reactive({
+  isModalOpen: false,
   tables: useStorage('table-list', {} as TableState),
   setTables: (definition: any) => {
     let tableGroup: TableState = {}

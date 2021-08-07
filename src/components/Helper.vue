@@ -1,15 +1,17 @@
 <template>
   <div class="flex items-center space-x-3 right-3.95 bottom-5 absolute z-10">
-    <!-- <HelperExport v-tooltip="'Export SQL'" @click="exportSQL" /> -->
+    <HelperExport v-tooltip="'Export SQL'" @click="exportSQL = true" />
     <HelperScreenshot v-tooltip="'Take a screenshot'" @click="screenshot" />
     <HelperAutoArrange v-tooltip="'Auto arrange'" @click="autoArrange" />
     <HelperFocus v-tooltip="'Focus everything center'" @click="focusView" />
     <HelperZoom />
+
+    <Modal :open="exportSQL" @close="exportSQL = false"></Modal>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, nextTick, watch } from 'vue'
+  import { defineComponent, nextTick, ref, watch } from 'vue'
   import { state } from '../store'
   import { toPng } from 'html-to-image'
 
@@ -60,9 +62,7 @@
         })
       }
 
-      const exportSQL = () => {
-        console.log(state.tables)
-      }
+      const exportSQL = ref(false)
 
       return {
         state,
