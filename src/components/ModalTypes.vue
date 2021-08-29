@@ -11,7 +11,7 @@
         <div
           class="text-white p-4 border-b-2 border-dark-600 flex items-center justify-between"
         >
-          <h1 class="text-xl">Export SQL</h1>
+          <h1 class="text-xl">Export Types (for Typescript)</h1>
           <button class="btn-green" @click="copy(exportedCode)">
             {{ copied ? 'Copied!' : 'Copy' }}
           </button>
@@ -47,24 +47,31 @@
     },
     emits: ['close'],
     setup(props, { emit }) {
-      const reservedKeyword = [
-        'user',
-        'database',
-        'default',
-        'dictionary',
-        'files',
-        'group',
-        'index',
-        'level',
-        'max',
-        'min',
-        'password',
-        'procedure',
-        'table',
-        'user',
-        'view',
-      ]
+      const capitalizeFirstLetter = (text: string) => {
+        return text.charAt(0).toUpperCase() + text.slice(1)
+      }
+
       const exportedCode = computed(() => {
+        const referenceTable: { [key: string]: string } = {
+          uuid: 'string',
+          text: 'string',
+          char: 'string',
+          varchar: 'string',
+          ARRAY: 'any[]',
+          boolean: 'boolean',
+          date: 'string',
+          time: 'string',
+          timestamp: 'string',
+          timestamptz: 'string',
+          interval: 'string',
+          json: 'json',
+          smallint: 'number',
+          int: 'number',
+          bigint: 'number',
+          float: 'number',
+          float8: 'number',
+        }
+
         let code = ''
         const dependencies: any = {}
         Object.entries(state.tables).forEach(([table, value]) => {
@@ -83,7 +90,7 @@
             if (d.every((dependency: any) => output.includes(dependency))) {
               // If all dependencies are already in the output array
               output.push(key) // Pushing "A" to the output
-              keys.splice(i, 1) // Removing "A" from the keys
+              keys.splice(+i, 1) // Removing "A" from the keys
             }
           }
         }
@@ -92,51 +99,41 @@
           const table = v
           const value = state.tables[v]
 
-          code += `create table ${table} (\n`
+          code += `interface ${capitalizeFirstLetter(table)} {\n`
           value.columns?.forEach((v, i, arr) => {
             // Set title
-            if (reservedKeyword.includes(v.title)) {
-              code += ` "${v.title}"`
-            } else {
-              code += ` ${v.title}`
-            }
+            code += `  ${v.title}`
 
-            // Set data format
-            if (v.format == 'integer' && v.pk) {
-              code += ` serial`
-            } else {
-              code += ` ${v.format}`
-            }
+            // Check required?
+            if (!v.required) code += '?'
+            code += ': '
 
-            // Set references
-            if (v.fk)
-              code += ` references ${v.fk.split('.')[0]} (${
-                v.fk.split('.')[1]
-              })`
-            // code += ` references ${v.fk}`
+            // Map to Typescript types
+            code += referenceTable[v.format]
+              ? referenceTable[v.format]
+              : 'any // type unknown'
 
-            // Set default
-            if (v.format == 'date' || v.format.includes('timestamp'))
-              code += ` default now()`
-            if (v.required && v.format == 'uuid' && !v.fk)
-              code += ` default uuid_generate_v4()`
-            // Set not null/primary key
-            else if (v.required && !v.fk) code += ` not null`
-            if (v.pk) code += ` primary key`
-
-            if (i == arr.length - 1) {
-              code += `\n`
-            } else {
-              code += `,\n`
-            }
+            // Check if Primary key or Foreign Key
+            if (v.pk) code += '   /* primary key */'
+            if (v.fk) code += `   /* foreign key to ${v.fk} */`
+            code += `;\n`
           })
-          code += `);\n\n`
+
+          value.columns
+            ?.map((z) => z.fk)
+            .filter((z) => typeof z === 'string')
+            .forEach((z) => {
+              let reference = z?.split('.')[0] as string
+              code += ` ${reference}?: ${capitalizeFirstLetter(reference)};\n`
+            })
+
+          code += `};\n\n`
         })
         return code
       })
 
       const { text, copy, copied } = useClipboard({
-        source: exportedCode,
+        source: '',
       })
 
       const target = ref()

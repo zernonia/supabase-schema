@@ -1,12 +1,14 @@
 <template>
   <div class="flex items-center space-x-3 right-3.95 bottom-5 absolute z-10">
+    <HelperExportTypes v-tooltip="'Export Types'" @click="exportTypes = true" />
     <HelperExport v-tooltip="'Export SQL'" @click="exportSQL = true" />
     <HelperScreenshot v-tooltip="'Take a screenshot'" @click="screenshot" />
     <HelperAutoArrange v-tooltip="'Auto arrange'" @click="autoArrange" />
     <HelperFocus v-tooltip="'Focus everything center'" @click="focusView" />
     <HelperZoom />
 
-    <Modal :open="exportSQL" @close="exportSQL = false"></Modal>
+    <ModalSQL :open="exportSQL" @close="exportSQL = false"></ModalSQL>
+    <ModalTypes :open="exportTypes" @close="exportTypes = false"></ModalTypes>
   </div>
 </template>
 
@@ -14,6 +16,7 @@
   import { defineComponent, nextTick, ref, watch } from 'vue'
   import { state } from '../store'
   import { toPng } from 'html-to-image'
+  import ModalTypes from './ModalTypes.vue'
 
   export default defineComponent({
     setup() {
@@ -63,6 +66,7 @@
       }
 
       const exportSQL = ref(false)
+      const exportTypes = ref(false)
 
       return {
         state,
@@ -70,6 +74,7 @@
         focusView,
         screenshot,
         exportSQL,
+        exportTypes,
       }
     },
   })

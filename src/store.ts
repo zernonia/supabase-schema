@@ -6,10 +6,18 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 export const state = reactive({
   isModalOpen: false,
   tables: useStorage('table-list', {} as TableState),
-  setTables: (definition: any) => {
+  setTables: (definition: any, paths: any) => {
     let tableGroup: TableState = {}
     let key: string
     let value: any
+    const checkView = (title: string) => {
+      if (Object.keys(paths[`/${title}`]).length == 1) {
+        return true
+      } else {
+        return false
+      }
+    }
+
     for ([key, value] of Object.entries(definition)) {
       let colGroup: Column[] = []
       Object.keys(value.properties).forEach((colKey: string) => {
@@ -31,9 +39,9 @@ export const state = reactive({
         colGroup.push(col)
       })
       // Push every table
-      console.log(key)
       tableGroup[key] = {
         title: key,
+        is_view: checkView(key),
         columns: colGroup,
         position: {
           x: state.tables[key] ? state.tables[key].position.x : 0,
@@ -147,6 +155,7 @@ export const supabaseClientState = reactive({
   apikey: useStorage('supabase-apikey', {
     url: '',
     anon: '',
+    last_url: '',
   }),
   supabase: () =>
     createClient(

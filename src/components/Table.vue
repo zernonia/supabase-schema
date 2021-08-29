@@ -11,6 +11,10 @@
     <h5
       class="py-2 pb-3 px-2 bg-dark-800 font-medium text-lg text-center border-b-2 border-dark-border"
     >
+      <i-bx:bx-news
+        v-if="table.is_view"
+        class="inline mb-1px mr-2"
+      ></i-bx:bx-news>
       {{ table?.title }}
     </h5>
     <div v-for="col in table?.columns" :key="col.title">

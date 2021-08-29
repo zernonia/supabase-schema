@@ -21,6 +21,7 @@ export interface Table {
   title: string
   columns?: Column[]
   position: Position
+  is_view: boolean
 }
 
 export interface TableState {

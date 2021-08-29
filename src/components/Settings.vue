@@ -111,27 +111,34 @@
                 res.json().then((data) => {
                   if (data.definitions) {
                     definition.value = data.definitions
-                    state.tables = {}
-                    state.setTables(definition.value)
-                    nextTick(() => {
-                      state.autoArrange()
-                    })
+                    if (
+                      supabaseClientState.apikey.last_url !=
+                      supabaseClientState.apikey.url
+                    ) {
+                      state.tables = {}
+                      state.setTables(definition.value, data.paths)
+                      nextTick(() => {
+                        state.autoArrange()
+                      })
+                    } else {
+                      state.setTables(definition.value, data.paths)
+                    }
                   }
-                  emit('fetch', false)
                 })
               } else {
                 res.text().then((text) => {
                   error.value = 'Invalid link'
-                  emit('fetch', false)
                 })
               }
             } else {
               error.value = 'Error with fetching data'
-              emit('fetch', false)
             }
           })
           .catch((e) => {
             error.value = e
+          })
+          .finally(() => {
+            supabaseClientState.apikey.last_url = supabaseClientState.apikey.url
             emit('fetch', false)
           })
       }
