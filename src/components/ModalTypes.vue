@@ -124,7 +124,7 @@
             .filter((z) => typeof z === 'string')
             .forEach((z) => {
               let reference = z?.split('.')[0] as string
-              code += ` ${reference}?: ${capitalizeFirstLetter(reference)};\n`
+              code += `  ${reference}?: ${capitalizeFirstLetter(reference)};\n`
             })
 
           code += `};\n\n`
