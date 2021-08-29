@@ -124,6 +124,8 @@
                       state.setTables(definition.value, data.paths)
                     }
                   }
+                  supabaseClientState.apikey.last_url =
+                    supabaseClientState.apikey.url
                 })
               } else {
                 res.text().then((text) => {
@@ -138,7 +140,6 @@
             error.value = e
           })
           .finally(() => {
-            supabaseClientState.apikey.last_url = supabaseClientState.apikey.url
             emit('fetch', false)
           })
       }
