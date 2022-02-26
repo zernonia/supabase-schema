@@ -23,23 +23,11 @@
   </menu>
 </template>
 
-<script lang="ts">
-  import { defineComponent, computed, ref, onMounted } from 'vue'
+<script setup lang="ts">
   import { useRoute, useRouter } from 'vue-router'
-  import Logo from '../assets/logo.svg'
 
-  export default defineComponent({
-    setup() {
-      const route = useRoute()
-      const router = useRouter()
-
-      return {
-        Logo,
-        route,
-        router,
-      }
-    },
-  })
+  const route = useRoute()
+  const router = useRouter()
 </script>
 
 <style></style>

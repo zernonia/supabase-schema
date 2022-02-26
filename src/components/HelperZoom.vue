@@ -22,26 +22,16 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script setup lang="ts">
   import { state } from '../store'
 
-  export default defineComponent({
-    setup() {
-      const updateView = (type: string) => {
-        if (type == 'plus') {
-          if (state.schemaView.scale >= 3) return
-          state.schemaView.scale += 0.1
-        } else {
-          if (state.schemaView.scale <= 0.47) return
-          state.schemaView.scale -= 0.1
-        }
-      }
-
-      return {
-        state,
-        updateView,
-      }
-    },
-  })
+  const updateView = (type: string) => {
+    if (type == 'plus') {
+      if (state.schemaView.scale >= 3) return
+      state.schemaView.scale += 0.1
+    } else {
+      if (state.schemaView.scale <= 0.47) return
+      state.schemaView.scale -= 0.1
+    }
+  }
 </script>

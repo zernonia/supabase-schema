@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   import { toRefs } from '@vueuse/core'
   import {
     computed,
@@ -57,98 +57,79 @@
   import Connector from './Connector.vue'
   import { state, supabaseClientState } from '../store'
 
-  export default defineComponent({
-    components: {
-      Connector,
+  const prop = defineProps({
+    table: {
+      type: Object as PropType<Table>,
+      required: true,
     },
-    props: {
-      table: {
-        type: Object as PropType<Table>,
-        required: true,
-      },
-      scale: {
-        type: Number,
-        required: true,
-      },
-      mounted: Boolean,
+    scale: {
+      type: Number,
+      required: true,
     },
-    emits: ['tableDragging'],
-    setup(prop, { emit }) {
-      const { scale, table } = toRefs(prop)
-      const isDragging = ref(false)
-      const ix = ref(0) //initial
-      const iy = ref(0)
+    mounted: Boolean,
+  })
+  const emit = defineEmits(['tableDragging'])
 
-      const position = computed(
-        () => state.tables[`${table.value.title}`].position
-      ) // position
+  const { scale, table } = toRefs(prop)
+  const isDragging = ref(false)
+  const ix = ref(0) //initial
+  const iy = ref(0)
 
-      // Dragging Event
-      const tablesSelected = ref<any>({})
-      const dragStart = (e: MouseEvent) => {
-        if (e.which != 1) return
-        emit('tableDragging', true)
-        isDragging.value = true
-        document.onmousemove = dragEvent
-        document.onmouseup = dragEnd
+  const position = computed(() => state.tables[`${table.value.title}`].position) // position
 
-        if (state.tableSelected.size) {
-          state.tableSelected.forEach((el) => {
-            tablesSelected.value[el.id] = {
-              ix: e.clientX - state.tables[el.id].position.x * scale.value,
-              iy: e.clientY - state.tables[el.id].position.y * scale.value,
-            }
-          })
-        } else {
-          ix.value = e.clientX - position.value.x * scale.value
-          iy.value = e.clientY - position.value.y * scale.value
-        }
-      }
-      const dragEvent = (e: MouseEvent) => {
-        if (!isDragging) return
-        if (state.tableSelected.size) {
-          state.tableSelected.forEach((el) => {
-            state.tables[el.id].position = {
-              x: (e.clientX - tablesSelected.value[el.id].ix) / scale.value,
-              y: (e.clientY - tablesSelected.value[el.id].iy) / scale.value,
-            }
-          })
-        } else {
-          state.tables[`${table.value.title}`].position = {
-            x: (e.clientX - ix.value) / scale.value,
-            y: (e.clientY - iy.value) / scale.value,
-          }
-        }
-      }
-      const dragEnd = (e: MouseEvent) => {
-        emit('tableDragging', false)
-        tablesSelected.value = {}
-        isDragging.value = false
-        document.onmousemove = null
-        document.onmouseup = null
-      }
+  // Dragging Event
+  const tablesSelected = ref<any>({})
+  const dragStart = (e: MouseEvent) => {
+    if (e.which != 1) return
+    emit('tableDragging', true)
+    isDragging.value = true
+    document.onmousemove = dragEvent
+    document.onmouseup = dragEnd
 
-      // hover table to highlight connection
-      const isHover = ref(false)
-      watch(isHover, (n) => {
-        if (n) {
-          state.tableHighlighted = table.value.title
-        } else {
-          state.tableHighlighted = ''
+    if (state.tableSelected.size) {
+      state.tableSelected.forEach((el) => {
+        tablesSelected.value[el.id] = {
+          ix: e.clientX - state.tables[el.id].position.x * scale.value,
+          iy: e.clientY - state.tables[el.id].position.y * scale.value,
         }
       })
-
-      return {
-        isDragging,
-        dragStart,
-        dragEvent,
-        dragEnd,
-        state,
-        position,
-
-        isHover,
+    } else {
+      ix.value = e.clientX - position.value.x * scale.value
+      iy.value = e.clientY - position.value.y * scale.value
+    }
+  }
+  const dragEvent = (e: MouseEvent) => {
+    if (!isDragging) return
+    if (state.tableSelected.size) {
+      state.tableSelected.forEach((el) => {
+        state.tables[el.id].position = {
+          x: (e.clientX - tablesSelected.value[el.id].ix) / scale.value,
+          y: (e.clientY - tablesSelected.value[el.id].iy) / scale.value,
+        }
+      })
+    } else {
+      state.tables[`${table.value.title}`].position = {
+        x: (e.clientX - ix.value) / scale.value,
+        y: (e.clientY - iy.value) / scale.value,
       }
-    },
+    }
+  }
+  const dragEnd = (e: MouseEvent) => {
+    emit('tableDragging', false)
+    tablesSelected.value = {}
+    isDragging.value = false
+    document.onmousemove = null
+    document.onmouseup = null
+  }
+
+  // hover table to highlight connection
+  const isHover = ref(false)
+  watch(isHover, (n) => {
+    if (n) {
+      state.tableHighlighted = table.value.title
+    } else {
+      state.tableHighlighted = ''
+    }
   })
 </script>
 

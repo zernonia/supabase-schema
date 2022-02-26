@@ -81,93 +81,76 @@
   </menu>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   import { defineComponent, computed, ref, nextTick } from 'vue'
   import { useStorage } from '@vueuse/core'
   import { state, supabaseClientState } from '../store'
   import Logo from '../assets/logo.svg'
 
-  export default defineComponent({
-    emits: ['fetch'],
-    setup(prop, { emit }) {
-      // Form fetch data
-      const definition = useStorage('definitions', {})
-      const title = ref('Supabase Schema')
-      const url = computed(() => supabaseClientState.apikey.url)
-      const anon = computed(() => supabaseClientState.apikey.anon)
-      const error = ref('')
+  const emit = defineEmits(['fetch'])
+  // Form fetch data
+  const definition = useStorage('definitions', {})
+  const title = ref('Supabase Schema')
+  const url = computed(() => supabaseClientState.apikey.url)
+  const anon = computed(() => supabaseClientState.apikey.anon)
+  const error = ref('')
 
-      const fetchData = () => {
-        if (!url.value || !anon.value) return
-        fetch(`${url.value}/rest/v1/?apikey=${anon.value}`)
-          .then(async (res) => {
-            emit('fetch', true)
-            if (res.ok) {
-              const contentType = res.headers.get('content-type')
-              if (
-                contentType &&
-                contentType.indexOf('application/openapi+json') !== -1
-              ) {
-                res.json().then((data) => {
-                  if (data.definitions) {
-                    definition.value = data.definitions
-                    if (
-                      supabaseClientState.apikey.last_url !=
-                      supabaseClientState.apikey.url
-                    ) {
-                      state.tables = {}
-                      state.setTables(definition.value, data.paths)
-                      nextTick(() => {
-                        state.autoArrange()
-                      })
-                    } else {
-                      state.setTables(definition.value, data.paths)
-                    }
-                  }
-                  supabaseClientState.apikey.last_url =
-                    supabaseClientState.apikey.url
-                })
-              } else {
-                res.text().then((text) => {
-                  error.value = 'Invalid link'
-                })
+  const fetchData = () => {
+    if (!url.value || !anon.value) return
+    fetch(`${url.value}/rest/v1/?apikey=${anon.value}`)
+      .then(async (res) => {
+        emit('fetch', true)
+        if (res.ok) {
+          const contentType = res.headers.get('content-type')
+          if (
+            contentType &&
+            contentType.indexOf('application/openapi+json') !== -1
+          ) {
+            res.json().then((data) => {
+              if (data.definitions) {
+                definition.value = data.definitions
+                if (
+                  supabaseClientState.apikey.last_url !=
+                  supabaseClientState.apikey.url
+                ) {
+                  state.tables = {}
+                  state.setTables(definition.value, data.paths)
+                  nextTick(() => {
+                    state.autoArrange()
+                  })
+                } else {
+                  state.setTables(definition.value, data.paths)
+                }
               }
-            } else {
-              error.value = 'Error with fetching data'
-            }
-          })
-          .catch((e) => {
-            error.value = e
-          })
-          .finally(() => {
-            emit('fetch', false)
-          })
-      }
-
-      const clearStorage = () => {
-        localStorage.clear()
-        window.location.reload()
-      }
-
-      // toggle Panel
-      const togglePanel = useStorage('togglePanel', true)
-      const positionPanel = computed(() => {
-        return togglePanel.value ? '1.25rem' : '-22.5rem'
+              supabaseClientState.apikey.last_url =
+                supabaseClientState.apikey.url
+            })
+          } else {
+            res.text().then((text) => {
+              error.value = 'Invalid link'
+            })
+          }
+        } else {
+          error.value = 'Error with fetching data'
+        }
       })
+      .catch((e) => {
+        error.value = e
+      })
+      .finally(() => {
+        emit('fetch', false)
+      })
+  }
 
-      return {
-        Logo,
-        title,
-        url,
-        anon,
-        error,
-        fetchData,
-        clearStorage,
-        togglePanel,
-        positionPanel,
-        supabaseClientState,
-      }
-    },
+  const clearStorage = () => {
+    localStorage.clear()
+    window.location.reload()
+  }
+
+  // toggle Panel
+  const togglePanel = useStorage('togglePanel', true)
+  const positionPanel = computed(() => {
+    return togglePanel.value ? '1.25rem' : '-22.5rem'
   })
 </script>
 

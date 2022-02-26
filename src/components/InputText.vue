@@ -10,37 +10,29 @@
     />
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    props: {
-      type: {
-        type: String,
-        default: 'text',
-      },
-      name: {
-        type: String,
-        default: '',
-      },
-      placeholder: {
-        type: String,
-        default: 'placeholder',
-      },
-      modelValue: {
-        type: String,
-        required: true,
-        default: '',
-      },
+<script setup lang="ts">
+  const prop = defineProps({
+    type: {
+      type: String,
+      default: 'text',
     },
-    emits: ['update:modelValue'],
-    setup(prop, { emit }) {
-      const inputValue = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).value)
-      }
-      return {
-        inputValue,
-      }
+    name: {
+      type: String,
+      default: '',
+    },
+    placeholder: {
+      type: String,
+      default: 'placeholder',
+    },
+    modelValue: {
+      type: String,
+      required: true,
+      default: '',
     },
   })
+
+  const emit = defineEmits(['update:modelValue'])
+  const inputValue = (e: Event) => {
+    emit('update:modelValue', (e.target as HTMLInputElement).value)
+  }
 </script>

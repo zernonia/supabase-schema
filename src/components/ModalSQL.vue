@@ -36,123 +36,109 @@
   </teleport>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   import { onClickOutside, useClipboard } from '@vueuse/core'
   import { computed, defineComponent, ref } from 'vue'
   import { state } from '../store'
 
-  export default defineComponent({
-    props: {
-      open: Boolean,
-    },
-    emits: ['close'],
-    setup(props, { emit }) {
-      const reservedKeyword = [
-        'user',
-        'database',
-        'default',
-        'dictionary',
-        'files',
-        'group',
-        'index',
-        'level',
-        'max',
-        'min',
-        'password',
-        'procedure',
-        'table',
-        'user',
-        'view',
-      ]
-      const exportedCode = computed(() => {
-        let code = ''
-        const dependencies: any = {}
-        Object.entries(state.tables).forEach(([table, value]) => {
-          dependencies[table] = value.columns
-            ?.map((v) => v.fk?.split('.')[0])
-            .filter((v) => typeof v === 'string')
-        })
-        let keys = Object.keys(dependencies), // ["A","B","C","D","E","F"]
-          output: string[] = []
+  const prop = defineProps({
+    open: Boolean,
+  })
+  const emit = defineEmits(['close'])
 
-        while (keys.length) {
-          for (let i in keys) {
-            let key = keys[i], // "A"
-              d = dependencies[key] // []
+  const reservedKeyword = [
+    'user',
+    'database',
+    'default',
+    'dictionary',
+    'files',
+    'group',
+    'index',
+    'level',
+    'max',
+    'min',
+    'password',
+    'procedure',
+    'table',
+    'user',
+    'view',
+  ]
+  const exportedCode = computed(() => {
+    let code = ''
+    const dependencies: any = {}
+    Object.entries(state.tables).forEach(([table, value]) => {
+      dependencies[table] = value.columns
+        ?.map((v) => v.fk?.split('.')[0])
+        .filter((v) => typeof v === 'string')
+    })
+    let keys = Object.keys(dependencies), // ["A","B","C","D","E","F"]
+      output: string[] = []
 
-            if (d.every((dependency: any) => output.includes(dependency))) {
-              // If all dependencies are already in the output array
-              output.push(key) // Pushing "A" to the output
-              keys.splice(+i, 1) // Removing "A" from the keys
-            }
-          }
+    while (keys.length) {
+      for (let i in keys) {
+        let key = keys[i], // "A"
+          d = dependencies[key] // []
+
+        if (d.every((dependency: any) => output.includes(dependency))) {
+          // If all dependencies are already in the output array
+          output.push(key) // Pushing "A" to the output
+          keys.splice(+i, 1) // Removing "A" from the keys
+        }
+      }
+    }
+
+    output.forEach((v) => {
+      if (state.tables[v].is_view) return
+      const table = v
+      const value = state.tables[v]
+
+      code += `create table ${table} (\n`
+      value.columns?.forEach((v, i, arr) => {
+        // Set title
+        if (reservedKeyword.includes(v.title)) {
+          code += `  "${v.title}"`
+        } else {
+          code += `  ${v.title}`
         }
 
-        output.forEach((v) => {
-          if (state.tables[v].is_view) return
-          const table = v
-          const value = state.tables[v]
+        // Set data format
+        if (v.format == 'integer' && v.pk) {
+          code += ` serial`
+        } else {
+          code += ` ${v.format}`
+        }
 
-          code += `create table ${table} (\n`
-          value.columns?.forEach((v, i, arr) => {
-            // Set title
-            if (reservedKeyword.includes(v.title)) {
-              code += `  "${v.title}"`
-            } else {
-              code += `  ${v.title}`
-            }
+        // Set references
+        if (v.fk)
+          code += ` references ${v.fk.split('.')[0]} (${v.fk.split('.')[1]})`
+        // code += ` references ${v.fk}`
 
-            // Set data format
-            if (v.format == 'integer' && v.pk) {
-              code += ` serial`
-            } else {
-              code += ` ${v.format}`
-            }
+        // Set default
+        if (v.format == 'date' || v.format.includes('timestamp'))
+          code += ` default now()`
+        if (v.required && v.format == 'uuid' && !v.fk)
+          code += ` default uuid_generate_v4()`
+        // Set not null/primary key
+        else if (v.required && !v.fk) code += ` not null`
+        if (v.pk) code += ` primary key`
 
-            // Set references
-            if (v.fk)
-              code += ` references ${v.fk.split('.')[0]} (${
-                v.fk.split('.')[1]
-              })`
-            // code += ` references ${v.fk}`
-
-            // Set default
-            if (v.format == 'date' || v.format.includes('timestamp'))
-              code += ` default now()`
-            if (v.required && v.format == 'uuid' && !v.fk)
-              code += ` default uuid_generate_v4()`
-            // Set not null/primary key
-            else if (v.required && !v.fk) code += ` not null`
-            if (v.pk) code += ` primary key`
-
-            if (i == arr.length - 1) {
-              code += `\n`
-            } else {
-              code += `,\n`
-            }
-          })
-          code += `);\n\n`
-        })
-        return code
+        if (i == arr.length - 1) {
+          code += `\n`
+        } else {
+          code += `,\n`
+        }
       })
+      code += `);\n\n`
+    })
+    return code
+  })
 
-      const { text, copy, copied } = useClipboard({
-        source: exportedCode,
-      })
+  const { text, copy, copied } = useClipboard({
+    source: exportedCode,
+  })
 
-      const target = ref()
-      onClickOutside(target, (e) => {
-        emit('close')
-      })
-
-      return {
-        state,
-        target,
-        exportedCode,
-        text,
-        copied,
-        copy,
-      }
-    },
+  const target = ref()
+  onClickOutside(target, (e) => {
+    emit('close')
   })
 </script>
