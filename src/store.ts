@@ -1,6 +1,6 @@
 import { useStorage } from '@vueuse/core'
 import { reactive } from 'vue'
-import { Table, Column, TableState, VisualState } from './interface'
+import { Column, TableState } from './interface'
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 export const state = reactive({
@@ -104,51 +104,6 @@ export const state = reactive({
     },
     scale: 1,
   }),
-
-  dashboardZoomable: true,
-  dashboardView: useStorage('view-dashboard', {
-    translate: {
-      x: 0,
-      y: 0,
-    },
-    scale: 1,
-  }),
-  zoomonVisual: (x: number, y: number) => {
-    state.dashboardView.translate = {
-      x,
-      y,
-    }
-  },
-  isEditing: false,
-  visuals: useStorage('visual-list', {} as VisualState),
-  clearVisual: () => {
-    for (var member in state.visuals) delete state.visuals[member]
-  },
-  addVisual: () => {
-    // I generate the UID from two parts here
-    // to ensure the random number provide enough bits.
-    const firstPart = (Math.random() * 46656) | 0
-    const secondPart = (Math.random() * 46656) | 0
-    const first = ('000' + firstPart.toString(36)).slice(-3)
-    const second = ('000' + secondPart.toString(36)).slice(-3)
-    const combine = first + second
-    state.visuals[combine] = {
-      id: combine,
-      type: 'card',
-      position: {
-        x: -320,
-        y: 320,
-      },
-      size: {
-        width: 300,
-        height: 300,
-      },
-      visual: {
-        config: {},
-        customize: {},
-      },
-    }
-  },
 })
 
 export const supabaseClientState = reactive({

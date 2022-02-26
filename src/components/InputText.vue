@@ -6,7 +6,7 @@
       :placeholder="placeholder"
       :value="modelValue"
       @input="inputValue"
-      class="w-full dark:bg-dark-900 dark:text-white-700 dark:placeholder-dark-500 rounded-md px-4 py-2 h-10 flex-grow border-warm-gray-300 dark:border-dark-border focus:border-green-500 focus:ring-green-500"
+      class="appearance-none w-full dark:bg-dark-900 dark:text-white-700 dark:placeholder-dark-500 rounded-md px-4 py-2 h-10 flex-grow border border-green-300 dark:border-dark-border focus:border-green-500 focus:ring-green-500 focus:outline-none"
     />
   </div>
 </template>

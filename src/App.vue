@@ -1,6 +1,7 @@
 <template>
   <main
     class="w-screen h-screen relative bg-white dark:bg-dark-900 text-dark-50 dark:text-white overflow-hidden"
+    @wheel="$event.preventDefault()"
   >
     <router-view></router-view>
     <!-- <Navigation></Navigation> -->
