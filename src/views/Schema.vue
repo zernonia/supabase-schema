@@ -49,33 +49,58 @@
   // Canvas
   const canvas = ref<any>(null)
 
-  const scrollEvent = (e: WheelEvent | any) => {
+  const scrollEvent = (e: WheelEvent) => {
     if (isDraggingChild.value) return
-    const xs =
-      (e.clientX - state.schemaView.translate.x) / state.schemaView.scale
-    const ys =
-      (e.clientY - state.schemaView.translate.y) / state.schemaView.scale
-    const delta: number = e.wheelData ? e.wheelData : -e.deltaY
-    if (delta > 0) {
-      if (state.schemaView.scale <= 3) state.schemaView.scale *= 1.1
+    let scaleFactor = 1.05
+
+    if (checkIsTrackpad(e)) {
+      dragEvent(e)
     } else {
-      if (state.schemaView.scale >= 0.5) state.schemaView.scale /= 1.1
+      const xs =
+        (e.clientX - state.schemaView.translate.x) / state.schemaView.scale
+      const ys =
+        (e.clientY - state.schemaView.translate.y) / state.schemaView.scale
+      if (-e.deltaY > 0) {
+        if (state.schemaView.scale <= 3) state.schemaView.scale *= scaleFactor
+      } else {
+        if (state.schemaView.scale >= 0.5) state.schemaView.scale /= scaleFactor
+      }
+      state.schemaView.translate.x = e.clientX - xs * state.schemaView.scale
+      state.schemaView.translate.y = e.clientY - ys * state.schemaView.scale
     }
-    state.schemaView.translate.x = e.clientX - xs * state.schemaView.scale
-    state.schemaView.translate.y = e.clientY - ys * state.schemaView.scale
   }
 
   const isDragging = ref(false)
   const isDraggingChild = ref(false)
+
+  function checkIsTrackpad(e: any) {
+    var isTrackpad = false
+    if (e.wheelDeltaY) {
+      if (e.wheelDeltaY === e.deltaY * -3) {
+        isTrackpad = true
+      }
+    } else if (e.deltaMode === 0) {
+      isTrackpad = true
+    }
+    return isTrackpad
+  }
+
   const dragStart = (e: MouseEvent) => {
     if (e.which != 2) return
     isDragging.value = true
     document.onmousemove = dragEvent
     document.onmouseup = dragEnd
   }
-  const dragEvent = (e: MouseEvent) => {
-    const movX = e.movementX
-    const movY = e.movementY
+  const dragEvent = (e: MouseEvent | WheelEvent) => {
+    let movX = 0
+    let movY = 0
+    if (e instanceof WheelEvent) {
+      movX = e.deltaX * 2
+      movY = e.deltaY * 2
+    } else {
+      movX = e.movementX
+      movY = e.movementY
+    }
     state.schemaView.translate.x += movX
     state.schemaView.translate.y += movY
   }
