@@ -72,6 +72,7 @@
       dependencies[table] = value.columns
         ?.map((v) => v.fk?.split('.')[0])
         .filter((v) => typeof v === 'string')
+        .filter((v) => table != v)
     })
     let keys = Object.keys(dependencies), // ["A","B","C","D","E","F"]
       output: string[] = []
