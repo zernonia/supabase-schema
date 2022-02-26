@@ -4,15 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Bar: typeof import('./src/components/Customize/Bar.vue')['default']
-    Card: typeof import('./src/components/Customize/Card.vue')['default']
     Connector: typeof import('./src/components/Connector.vue')['default']
     Helper: typeof import('./src/components/Helper.vue')['default']
-    HelperAutoArrange: typeof import('./src/components/HelperAutoArrange.vue')['default']
-    HelperExport: typeof import('./src/components/HelperExport.vue')['default']
-    HelperExportTypes: typeof import('./src/components/HelperExportTypes.vue')['default']
-    HelperFocus: typeof import('./src/components/HelperFocus.vue')['default']
-    HelperScreenshot: typeof import('./src/components/HelperScreenshot.vue')['default']
     HelperZoom: typeof import('./src/components/HelperZoom.vue')['default']
     'IBx:bxNews': typeof import('~icons/bx/bx-news')['default']
     'IHeroiconsSolid:minusSm': typeof import('~icons/heroicons-solid/minus-sm')['default']
@@ -23,18 +16,14 @@ declare module 'vue' {
     'IMdi:databaseExportOutline': typeof import('~icons/mdi/database-export-outline')['default']
     'IMdi:languageTypescript': typeof import('~icons/mdi/language-typescript')['default']
     IMdiGithub: typeof import('~icons/mdi/github')['default']
-    InputNumber: typeof import('./src/components/InputNumber.vue')['default']
     InputText: typeof import('./src/components/InputText.vue')['default']
     'IUil:focusTarget': typeof import('~icons/uil/focus-target')['default']
     Loading: typeof import('./src/components/Loading.vue')['default']
     ModalSQL: typeof import('./src/components/ModalSQL.vue')['default']
     ModalTypes: typeof import('./src/components/ModalTypes.vue')['default']
     Navigation: typeof import('./src/components/Navigation.vue')['default']
-    Select: typeof import('./src/components/Select.vue')['default']
-    SelectChart: typeof import('./src/components/SelectChart.vue')['default']
     Settings: typeof import('./src/components/Settings.vue')['default']
     Table: typeof import('./src/components/Table.vue')['default']
-    Visual: typeof import('./src/components/Visual.vue')['default']
   }
 }
 
