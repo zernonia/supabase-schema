@@ -4,8 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Bar: typeof import('./src/components/Chart/Bar.vue')['default']
-    Card: typeof import('./src/components/Chart/Card.vue')['default']
+    Bar: typeof import('./src/components/Customize/Bar.vue')['default']
+    Card: typeof import('./src/components/Customize/Card.vue')['default']
     Connector: typeof import('./src/components/Connector.vue')['default']
     Helper: typeof import('./src/components/Helper.vue')['default']
     HelperAutoArrange: typeof import('./src/components/HelperAutoArrange.vue')['default']
