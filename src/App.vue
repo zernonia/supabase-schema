@@ -9,24 +9,8 @@
   <Loading v-if="isFetching"></Loading>
 </template>
 
-<script lang="ts">
-  import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+  import { ref } from 'vue'
 
-  import { state } from './store'
-  export default defineComponent({
-    setup() {
-      const isMounted = ref(false)
-      const isFetching = ref(false)
-
-      return {
-        isMounted,
-        isFetching,
-        state,
-      }
-    },
-  })
+  const isFetching = ref(false)
 </script>
-
-<script lang="ts"></script>
-
-<style></style>
