@@ -1,7 +1,7 @@
 <template>
   <div
     :id="table.title"
-    class="selectable pb-2 absolute z-20 box rounded-md overflow-hidden bg-warm-gray-100 dark:bg-dark-700 border-2 dark:border-dark-border hover:border-green-500"
+    class="selectable pb-2 absolute z-20 box rounded-md overflow-hidden bg-warm-gray-100 dark:bg-dark-700 border-2 dark:border-dark-border !hover:border-green-500"
     :style="{ top: position.y + 'px', left: position.x + 'px' }"
     style="cursor: grab"
     @mousedown.prevent="dragStart"

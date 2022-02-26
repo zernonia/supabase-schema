@@ -145,7 +145,7 @@
     border-radius: 0.1em;
   }
   .selected {
-    @apply border-green-500;
+    @apply !border-green-500;
   }
   .container {
     @apply !max-w-none;
