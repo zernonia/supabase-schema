@@ -12,6 +12,7 @@ declare module 'vue' {
     'IHeroiconsSolid:plusSm': typeof import('~icons/heroicons-solid/plus-sm')['default']
     'IIc:baselineAutoFixHigh': typeof import('~icons/ic/baseline-auto-fix-high')['default']
     'IMajesticons:cogLine': typeof import('~icons/majesticons/cog-line')['default']
+    'IMajesticons:moon': typeof import('~icons/majesticons/moon')['default']
     'IMdi:cameraOutline': typeof import('~icons/mdi/camera-outline')['default']
     'IMdi:databaseExportOutline': typeof import('~icons/mdi/database-export-outline')['default']
     'IMdi:languageTypescript': typeof import('~icons/mdi/language-typescript')['default']

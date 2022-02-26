@@ -1,9 +1,9 @@
 <template>
   <menu
-    class="absolute z-1000 top-5 m-0 p-0 w-90 rounded-md border-2 border-dark-border transition-right duration-500 ease-in-out"
+    class="absolute z-1000 top-5 m-0 p-0 w-90 rounded-md border-2 dark:border-dark-border transition-right duration-500 ease-in-out"
     :style="{ right: positionPanel }"
   >
-    <div class="relative bg-dark-800 p-6 rounded-md">
+    <div class="relative bg-light-300 dark:bg-dark-800 p-6 rounded-md">
       <div class="w-full flex justify-center">
         <img :src="Logo" class="h-32" alt="" />
       </div>
@@ -14,7 +14,7 @@
         Supabase Schema
         <a href="https://github.com/zernonia/supabase-schema" target="_blank">
           <i-mdi-github
-            class="text-lg ml-2 text-dark-500 hover:text-white"
+            class="text-lg ml-2 text-dark-500 dark:hover:text-white"
           ></i-mdi-github>
         </a>
       </h1>
@@ -24,7 +24,7 @@
       <div class="mt-4">
         <details :open="true">
           <summary class="font-medium uppercase">Steps</summary>
-          <ol class="mt-2 text-white-700 ml-8 list-decimal leading-tight">
+          <ol class="mt-2 dark:text-white-700 ml-8 list-decimal leading-tight">
             <li class="py-2">
               Obtain OpenAPI URL following instruction
               <a
@@ -61,7 +61,7 @@
         />
         <div class="flex justify-end mt-4">
           <button
-            class="bg-green-500 rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600"
+            class="bg-green-500 rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600 text-white"
             @click.prevent="fetchData"
           >
             Fetch
@@ -72,20 +72,28 @@
       <!-- arrow  -->
       <button
         v-tooltip:left.tooltip="'Settings'"
-        class="-left-3.95rem -top-1px !absolute btn"
+        class="-left-3.95rem -top-1px !absolute btn duration-300"
         @click="togglePanel = !togglePanel"
       >
         <i-majesticons:cog-line></i-majesticons:cog-line>
+      </button>
+      <button
+        v-tooltip:left.tooltip="'Toggle Dark mode'"
+        class="-left-3.95rem top-14 !absolute btn duration-300"
+        @click="toggleDark()"
+      >
+        <i-majesticons:moon></i-majesticons:moon>
       </button>
     </div>
   </menu>
 </template>
 
 <script setup lang="ts">
-  import { defineComponent, computed, ref, nextTick } from 'vue'
+  import { computed, ref, nextTick } from 'vue'
   import { useStorage } from '@vueuse/core'
   import { state, supabaseClientState } from '../store'
   import Logo from '../assets/logo.svg'
+  import { useDark, useToggle } from '@vueuse/core'
 
   const emit = defineEmits(['fetch'])
   // Form fetch data
@@ -152,6 +160,10 @@
   const positionPanel = computed(() => {
     return togglePanel.value ? '1.25rem' : '-22.5rem'
   })
+
+  // dark mode
+  const isDark = useDark()
+  const toggleDark = useToggle(isDark)
 </script>
 
 <style></style>

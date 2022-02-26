@@ -2,21 +2,23 @@
   <teleport to="body">
     <div
       v-if="open"
-      class="w-screen h-screen fixed top-0 left-0 flex items-center justify-center bg-dark-900 bg-opacity-50"
+      class="w-screen h-screen fixed top-0 left-0 flex items-center justify-center bg-light-400 dark:bg-dark-900 !bg-opacity-50"
     >
       <div
         ref="target"
-        class="bg-dark-800 w-full max-w-screen-md h-screen-sm rounded-md border-2 border-dark-600 flex flex-col"
+        class="bg-warm-gray-100 dark:bg-dark-800 w-full max-w-screen-md h-screen-sm rounded-md border-2 dark:border-dark-600 flex flex-col"
       >
         <div
-          class="text-white p-4 border-b-2 border-dark-600 flex items-center justify-between"
+          class="text-dark-100 dark:text-white p-4 border-b-2 dark:border-dark-600 flex items-center justify-between"
         >
           <h1 class="text-xl">Export SQL</h1>
           <button class="btn-green" @click="copy(exportedCode)">
             {{ copied ? 'Copied!' : 'Copy' }}
           </button>
         </div>
-        <div class="p-4 text-white h-full overflow-hidden overflow-y-auto">
+        <div
+          class="p-4 text-dark-100 dark:text-white h-full overflow-hidden overflow-y-auto"
+        >
           <p class="mb-4">
             There might be some issues with the exported code. You may submit
             <a
@@ -27,7 +29,7 @@
             >.
           </p>
           <pre
-            class="bg-dark-900 text-white-800 text-sm rounded-md p-4 h-auto"
+            class="bg-warm-gray-200 dark:bg-dark-900 text-warm-gray-500 dark:text-white-800 text-sm rounded-md p-4 h-auto"
             >{{ exportedCode }}</pre
           >
         </div>

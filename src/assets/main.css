@@ -33,12 +33,12 @@ input[type='color']::-webkit-color-swatch {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #1e1e1e;
+  @apply dark:bg-dark-800;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
+  @apply bg-warm-gray-200 dark:bg-dark-100;
 }
 
 /* Handle on hover */
@@ -54,9 +54,9 @@ input[type='color']::-webkit-color-swatch {
 }
 
 .btn {
-  @apply p-3 flex rounded-md bg-dark-800 border-2 border-dark-border cursor-pointer opacity-50 hover:opacity-100 hover:bg-dark-600 focus:outline-none transition duration-300 ease-in;
+  @apply p-3 flex rounded-md bg-light-300 dark:bg-dark-800 border-2 dark:border-dark-border cursor-pointer dark:opacity-50 hover:opacity-100 hover:bg-light-700 dark:hover:bg-dark-600 focus:outline-none transition duration-300 ease-in;
 }
 
 .btn-green {
-  @apply bg-green-500 rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600;
+  @apply bg-green-500 text-white rounded-md px-4 py-0 h-8 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600;
 }

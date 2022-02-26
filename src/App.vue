@@ -1,6 +1,6 @@
 <template>
   <main
-    class="w-screen h-screen relative bg-dark-900 text-white overflow-hidden"
+    class="w-screen h-screen relative bg-white dark:bg-dark-900 text-dark-50 dark:text-white overflow-hidden"
   >
     <router-view></router-view>
     <!-- <Navigation></Navigation> -->

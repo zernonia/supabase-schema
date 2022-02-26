@@ -10,7 +10,7 @@
     >
       <div
         id="screen-canvas"
-        class="w-screen h-screen relative overflow-hidden bg-dark-900"
+        class="w-screen h-screen relative overflow-hidden dark:bg-dark-900"
         :style="{ cursor: isDragging ? 'grabbing' : 'default' }"
         @wheel="scrollEvent"
         @mousedown="dragStart"

@@ -9,13 +9,18 @@
     <path
       ref="path"
       class="fill-transparent"
-      :stroke="isHover ? 'rgb(16, 185, 129)' : 'rgba(255,255,255,0.5)'"
+      :stroke="computedStrokeColor"
       pointer-events="visibleStroke"
       style="stroke-width: 3px"
       @mouseenter="isHover = true"
       @mouseleave="isHover = false"
     ></path>
-    <circle :cx="fkPos.x" :cy="fkPos.y" r="7" class="stroke-white fill-current">
+    <circle
+      :cx="fkPos.x"
+      :cy="fkPos.y"
+      r="7"
+      class="text-warm-gray-400 dark:text-white fill-current"
+    >
       fk
     </circle>
   </svg>
@@ -23,7 +28,8 @@
 
 <script setup lang="ts">
   import { state } from '../store'
-  import { computed, defineComponent, onMounted, ref, toRefs, watch } from 'vue'
+  import { computed, onMounted, ref, toRefs, watch } from 'vue'
+  import { useDark } from '@vueuse/core'
 
   const prop = defineProps({
     svg: {
@@ -170,4 +176,17 @@
       }
     }
   )
+
+  const isDark = useDark()
+  const computedStrokeColor = computed(() => {
+    if (isHover.value) {
+      return 'rgb(16, 185, 129)'
+    } else {
+      if (isDark.value) {
+        return 'rgba(214, 211, 209, 0.5)'
+      } else {
+        return 'rgba(255,255,255,0.5)'
+      }
+    }
+  })
 </script>
