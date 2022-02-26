@@ -183,9 +183,9 @@
       return 'rgb(16, 185, 129)'
     } else {
       if (isDark.value) {
-        return 'rgba(214, 211, 209, 0.5)'
-      } else {
         return 'rgba(255,255,255,0.5)'
+      } else {
+        return 'rgba(214, 211, 209, 0.5)'
       }
     }
   })
