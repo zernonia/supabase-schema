@@ -11,7 +11,38 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { state, supabaseClientState } from './store'
+
+  import { ref, toRefs, watch } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
+  import AES from 'crypto-js/aes'
+  import UTF8 from 'crypto-js/enc-utf8'
 
   const isFetching = ref(false)
+
+  const { hash } = toRefs(useRoute())
+  const router = useRouter()
+  const descryted = (encryptedText: string) =>
+    AES.decrypt(encryptedText, 'this password doesnt matter').toString(UTF8)
+
+  watch(
+    hash,
+    (n) => {
+      try {
+        if (!n) return
+        console.log({ n })
+        const descrytedText = descryted(n.substring(1))
+        const result = JSON.parse(descrytedText)
+
+        state.tables = result.tables
+        state.schemaView = result.schemaView
+        supabaseClientState.apikey = result.apikey
+
+        router.push('/')
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    { immediate: true }
+  )
 </script>

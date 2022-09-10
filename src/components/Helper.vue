@@ -1,5 +1,13 @@
 <template>
   <div class="flex items-center space-x-3 right-3.95 bottom-5 absolute z-10">
+    <button
+      class="btn"
+      v-tooltip="copied ? 'Copied' : 'Share link'"
+      @click="shareLink"
+    >
+      <i-mdi:share-variant-outline></i-mdi:share-variant-outline>
+    </button>
+
     <button class="btn" v-tooltip="'Export Types'" @click="exportTypes = true">
       <i-mdi:language-typescript></i-mdi:language-typescript>
     </button>
@@ -33,9 +41,11 @@
 
 <script setup lang="ts">
   import { nextTick, ref } from 'vue'
-  import { state } from '../store'
+  import { state, supabaseClientState } from '../store'
   import { toPng } from 'html-to-image'
+  import { useClipboard } from '@vueuse/core'
   import ModalTypes from './ModalTypes.vue'
+  import AES from 'crypto-js/aes'
 
   const autoArrange = () => {
     state.autoArrange()
@@ -84,4 +94,26 @@
 
   const exportSQL = ref(false)
   const exportTypes = ref(false)
+
+  const { copy, copied } = useClipboard()
+  const shareLink = () => {
+    const supabaseApikey = JSON.parse(
+      localStorage.getItem('supabase-apikey') ?? ''
+    )
+    const view = JSON.parse(localStorage.getItem('view') ?? '')
+    const tableList = JSON.parse(localStorage.getItem('table-list') ?? '')
+
+    const encrypted = AES.encrypt(
+      JSON.stringify({
+        apikey: supabaseClientState.apikey,
+        schemaView: state.schemaView,
+        tables: state.tables,
+      }),
+      'this password doesnt matter'
+    ).toString()
+
+    const url = new URL(window.location.href)
+    url.hash = encrypted
+    copy(url.toString())
+  }
 </script>
