@@ -7,16 +7,6 @@ import WindiCSS from 'vite-plugin-windicss'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          d3: ['d3'],
-          chartjs: ['vue-chart-3', 'chart.js'],
-        },
-      },
-    },
-  },
   plugins: [
     vue(),
     Components({

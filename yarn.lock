@@ -192,6 +192,11 @@
     "@supabase/realtime-js" "^1.0.9"
     "@supabase/storage-js" "^1.0.3"
 
+"@types/crypto-js@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.1.1.tgz#602859584cecc91894eb23a4892f38cfa927890d"
+  integrity sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==
+
 "@types/d3-array@*":
   version "2.12.1"
   resolved "https://registry.npmjs.org/@types/d3-array/-/d3-array-2.12.1.tgz"
@@ -735,13 +740,6 @@
     estree-walker "^2.0.2"
     magic-string "^0.25.7"
 
-"@vue/reactivity@3.1.5":
-  version "3.1.5"
-  resolved "https://registry.npmjs.org/@vue/reactivity/-/reactivity-3.1.5.tgz"
-  integrity sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==
-  dependencies:
-    "@vue/shared" "3.1.5"
-
 "@vue/reactivity@3.2.31", "@vue/reactivity@^3.2.27":
   version "3.2.31"
   resolved "https://registry.npmjs.org/@vue/reactivity/-/reactivity-3.2.31.tgz"
@@ -757,26 +755,9 @@
     "@vue/reactivity" "3.2.31"
     "@vue/shared" "3.2.31"
 
-"@vue/runtime-core@latest":
-  version "3.1.5"
-  resolved "https://registry.npmjs.org/@vue/runtime-core/-/runtime-core-3.1.5.tgz"
-  integrity sha512-YQbG5cBktN1RowQDKA22itmvQ+b40f0WgQ6CXK4VYoYICAiAfu6Cc14777ve8zp1rJRGtk5oIeS149TOculrTg==
-  dependencies:
-    "@vue/reactivity" "3.1.5"
-    "@vue/shared" "3.1.5"
-
 "@vue/runtime-dom@3.2.31":
   version "3.2.31"
   resolved "https://registry.npmjs.org/@vue/runtime-dom/-/runtime-dom-3.2.31.tgz"
-  integrity sha512-N+o0sICVLScUjfLG7u9u5XCjvmsexAiPt17GNnaWHJUfsKed5e85/A3SWgKxzlxx2SW/Hw7RQxzxbXez9PtY3g==
-  dependencies:
-    "@vue/runtime-core" "3.2.31"
-    "@vue/shared" "3.2.31"
-    csstype "^2.6.8"
-
-"@vue/runtime-dom@latest":
-  version "3.2.31"
-  resolved "https://registry.yarnpkg.com/@vue/runtime-dom/-/runtime-dom-3.2.31.tgz#79ce01817cb3caf2c9d923f669b738d2d7953eff"
   integrity sha512-N+o0sICVLScUjfLG7u9u5XCjvmsexAiPt17GNnaWHJUfsKed5e85/A3SWgKxzlxx2SW/Hw7RQxzxbXez9PtY3g==
   dependencies:
     "@vue/runtime-core" "3.2.31"
@@ -790,11 +771,6 @@
   dependencies:
     "@vue/compiler-ssr" "3.2.31"
     "@vue/shared" "3.2.31"
-
-"@vue/shared@3.1.5":
-  version "3.1.5"
-  resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.1.5.tgz"
-  integrity sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==
 
 "@vue/shared@3.2.31", "@vue/shared@^3.2.27":
   version "3.2.31"
@@ -1008,11 +984,6 @@ character-parser@^2.2.0:
   dependencies:
     is-regex "^1.0.3"
 
-chart.js@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.npmjs.org/chart.js/-/chart.js-3.5.0.tgz"
-  integrity sha512-J1a4EAb1Gi/KbhwDRmoovHTRuqT8qdF0kZ4XgwxpGethJHUdDrkqyPYwke0a+BuvSeUxPf8Cos6AX2AB8H8GLA==
-
 chokidar@^3.5.2:
   version "3.5.3"
   resolved "https://registry.npmjs.org/chokidar/-/chokidar-3.5.3.tgz"
@@ -1057,11 +1028,6 @@ colorette@^1.2.2:
   resolved "https://registry.npmjs.org/colorette/-/colorette-1.2.2.tgz"
   integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
 
-commander@2:
-  version "2.20.3"
-  resolved "https://registry.npmjs.org/commander/-/commander-2.20.3.tgz"
-  integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
-
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
@@ -1091,259 +1057,15 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
+crypto-js@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
+
 csstype@^2.6.8:
   version "2.6.17"
   resolved "https://registry.npmjs.org/csstype/-/csstype-2.6.17.tgz"
   integrity sha512-u1wmTI1jJGzCJzWndZo8mk4wnPTZd1eOIYTYvuEyOQGfmDl3TrabCCfKnOC86FZwW/9djqTl933UF/cS425i9A==
-
-csstype@latest:
-  version "3.0.10"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.10.tgz#2ad3a7bed70f35b965707c092e5f30b327c290e5"
-  integrity sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==
-
-d3-array@2, d3-array@>=2.5, d3-array@^2.3.0:
-  version "2.12.1"
-  resolved "https://registry.npmjs.org/d3-array/-/d3-array-2.12.1.tgz"
-  integrity sha512-B0ErZK/66mHtEsR1TkPEEkwdy+WDesimkM5gpZr5Dsg54BiTA5RXtYW5qTLIAcekaS9xfZrzBLF/OAkB3Qn1YQ==
-  dependencies:
-    internmap "^1.0.0"
-
-d3-axis@2:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/d3-axis/-/d3-axis-2.1.0.tgz"
-  integrity sha512-z/G2TQMyuf0X3qP+Mh+2PimoJD41VOCjViJzT0BHeL/+JQAofkiWZbWxlwFGb1N8EN+Cl/CW+MUKbVzr1689Cw==
-
-d3-brush@2:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/d3-brush/-/d3-brush-2.1.0.tgz"
-  integrity sha512-cHLLAFatBATyIKqZOkk/mDHUbzne2B3ZwxkzMHvFTCZCmLaXDpZRihQSn8UNXTkGD/3lb/W2sQz0etAftmHMJQ==
-  dependencies:
-    d3-dispatch "1 - 2"
-    d3-drag "2"
-    d3-interpolate "1 - 2"
-    d3-selection "2"
-    d3-transition "2"
-
-d3-chord@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-chord/-/d3-chord-2.0.0.tgz"
-  integrity sha512-D5PZb7EDsRNdGU4SsjQyKhja8Zgu+SHZfUSO5Ls8Wsn+jsAKUUGkcshLxMg9HDFxG3KqavGWaWkJ8EpU8ojuig==
-  dependencies:
-    d3-path "1 - 2"
-
-"d3-color@1 - 2", d3-color@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-color/-/d3-color-2.0.0.tgz"
-  integrity sha512-SPXi0TSKPD4g9tw0NMZFnR95XVgUZiBH+uUTqQuDu1OsE2zomHU7ho0FISciaPvosimixwHFl3WHLGabv6dDgQ==
-
-d3-contour@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-contour/-/d3-contour-2.0.0.tgz"
-  integrity sha512-9unAtvIaNk06UwqBmvsdHX7CZ+NPDZnn8TtNH1myW93pWJkhsV25JcgnYAu0Ck5Veb1DHiCv++Ic5uvJ+h50JA==
-  dependencies:
-    d3-array "2"
-
-d3-delaunay@5:
-  version "5.3.0"
-  resolved "https://registry.npmjs.org/d3-delaunay/-/d3-delaunay-5.3.0.tgz"
-  integrity sha512-amALSrOllWVLaHTnDLHwMIiz0d1bBu9gZXd1FiLfXf8sHcX9jrcj81TVZOqD4UX7MgBZZ07c8GxzEgBpJqc74w==
-  dependencies:
-    delaunator "4"
-
-"d3-dispatch@1 - 2", d3-dispatch@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-dispatch/-/d3-dispatch-2.0.0.tgz"
-  integrity sha512-S/m2VsXI7gAti2pBoLClFFTMOO1HTtT0j99AuXLoGFKO6deHDdnv6ZGTxSTTUTgO1zVcv82fCOtDjYK4EECmWA==
-
-d3-drag@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-drag/-/d3-drag-2.0.0.tgz"
-  integrity sha512-g9y9WbMnF5uqB9qKqwIIa/921RYWzlUDv9Jl1/yONQwxbOfszAWTCm8u7HOTgJgRDXiRZN56cHT9pd24dmXs8w==
-  dependencies:
-    d3-dispatch "1 - 2"
-    d3-selection "2"
-
-"d3-dsv@1 - 2", d3-dsv@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-dsv/-/d3-dsv-2.0.0.tgz"
-  integrity sha512-E+Pn8UJYx9mViuIUkoc93gJGGYut6mSDKy2+XaPwccwkRGlR+LO97L2VCCRjQivTwLHkSnAJG7yo00BWY6QM+w==
-  dependencies:
-    commander "2"
-    iconv-lite "0.4"
-    rw "1"
-
-"d3-ease@1 - 2", d3-ease@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-ease/-/d3-ease-2.0.0.tgz"
-  integrity sha512-68/n9JWarxXkOWMshcT5IcjbB+agblQUaIsbnXmrzejn2O82n3p2A9R2zEB9HIEFWKFwPAEDDN8gR0VdSAyyAQ==
-
-d3-fetch@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-fetch/-/d3-fetch-2.0.0.tgz"
-  integrity sha512-TkYv/hjXgCryBeNKiclrwqZH7Nb+GaOwo3Neg24ZVWA3MKB+Rd+BY84Nh6tmNEMcjUik1CSUWjXYndmeO6F7sw==
-  dependencies:
-    d3-dsv "1 - 2"
-
-d3-force@2:
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/d3-force/-/d3-force-2.1.1.tgz"
-  integrity sha512-nAuHEzBqMvpFVMf9OX75d00OxvOXdxY+xECIXjW6Gv8BRrXu6gAWbv/9XKrvfJ5i5DCokDW7RYE50LRoK092ew==
-  dependencies:
-    d3-dispatch "1 - 2"
-    d3-quadtree "1 - 2"
-    d3-timer "1 - 2"
-
-"d3-format@1 - 2", d3-format@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-format/-/d3-format-2.0.0.tgz"
-  integrity sha512-Ab3S6XuE/Q+flY96HXT0jOXcM4EAClYFnRGY5zsjRGNy6qCYrQsMffs7cV5Q9xejb35zxW5hf/guKw34kvIKsA==
-
-d3-geo@2:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/d3-geo/-/d3-geo-2.0.1.tgz"
-  integrity sha512-M6yzGbFRfxzNrVhxDJXzJqSLQ90q1cCyb3EWFZ1LF4eWOBYxFypw7I/NFVBNXKNqxv1bqLathhYvdJ6DC+th3A==
-  dependencies:
-    d3-array ">=2.5"
-
-d3-hierarchy@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-hierarchy/-/d3-hierarchy-2.0.0.tgz"
-  integrity sha512-SwIdqM3HxQX2214EG9GTjgmCc/mbSx4mQBn+DuEETubhOw6/U3fmnji4uCVrmzOydMHSO1nZle5gh6HB/wdOzw==
-
-"d3-interpolate@1 - 2", "d3-interpolate@1.2.0 - 2", d3-interpolate@2:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-2.0.1.tgz"
-  integrity sha512-c5UhwwTs/yybcmTpAVqwSFl6vrQ8JZJoT5F7xNFK9pymv5C0Ymcc9/LIJHtYIggg/yS9YHw8i8O8tgb9pupjeQ==
-  dependencies:
-    d3-color "1 - 2"
-
-"d3-path@1 - 2", d3-path@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-path/-/d3-path-2.0.0.tgz"
-  integrity sha512-ZwZQxKhBnv9yHaiWd6ZU4x5BtCQ7pXszEV9CU6kRgwIQVQGLMv1oiL4M+MK/n79sYzsj+gcgpPQSctJUsLN7fA==
-
-d3-polygon@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-polygon/-/d3-polygon-2.0.0.tgz"
-  integrity sha512-MsexrCK38cTGermELs0cO1d79DcTsQRN7IWMJKczD/2kBjzNXxLUWP33qRF6VDpiLV/4EI4r6Gs0DAWQkE8pSQ==
-
-"d3-quadtree@1 - 2", d3-quadtree@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-quadtree/-/d3-quadtree-2.0.0.tgz"
-  integrity sha512-b0Ed2t1UUalJpc3qXzKi+cPGxeXRr4KU9YSlocN74aTzp6R/Ud43t79yLLqxHRWZfsvWXmbDWPpoENK1K539xw==
-
-d3-random@2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/d3-random/-/d3-random-2.2.2.tgz"
-  integrity sha512-0D9P8TRj6qDAtHhRQn6EfdOtHMfsUWanl3yb/84C4DqpZ+VsgfI5iTVRNRbELCfNvRfpMr8OrqqUTQ6ANGCijw==
-
-d3-scale-chromatic@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-scale-chromatic/-/d3-scale-chromatic-2.0.0.tgz"
-  integrity sha512-LLqy7dJSL8yDy7NRmf6xSlsFZ6zYvJ4BcWFE4zBrOPnQERv9zj24ohnXKRbyi9YHnYV+HN1oEO3iFK971/gkzA==
-  dependencies:
-    d3-color "1 - 2"
-    d3-interpolate "1 - 2"
-
-d3-scale@3:
-  version "3.3.0"
-  resolved "https://registry.npmjs.org/d3-scale/-/d3-scale-3.3.0.tgz"
-  integrity sha512-1JGp44NQCt5d1g+Yy+GeOnZP7xHo0ii8zsQp6PGzd+C1/dl0KGsp9A7Mxwp+1D1o4unbTTxVdU/ZOIEBoeZPbQ==
-  dependencies:
-    d3-array "^2.3.0"
-    d3-format "1 - 2"
-    d3-interpolate "1.2.0 - 2"
-    d3-time "^2.1.1"
-    d3-time-format "2 - 3"
-
-d3-selection@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-selection/-/d3-selection-2.0.0.tgz"
-  integrity sha512-XoGGqhLUN/W14NmaqcO/bb1nqjDAw5WtSYb2X8wiuQWvSZUsUVYsOSkOybUrNvcBjaywBdYPy03eXHMXjk9nZA==
-
-d3-shape@2:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/d3-shape/-/d3-shape-2.1.0.tgz"
-  integrity sha512-PnjUqfM2PpskbSLTJvAzp2Wv4CZsnAgTfcVRTwW03QR3MkXF8Uo7B1y/lWkAsmbKwuecto++4NlsYcvYpXpTHA==
-  dependencies:
-    d3-path "1 - 2"
-
-"d3-time-format@2 - 3", d3-time-format@3:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/d3-time-format/-/d3-time-format-3.0.0.tgz"
-  integrity sha512-UXJh6EKsHBTjopVqZBhFysQcoXSv/5yLONZvkQ5Kk3qbwiUYkdX17Xa1PT6U1ZWXGGfB1ey5L8dKMlFq2DO0Ag==
-  dependencies:
-    d3-time "1 - 2"
-
-"d3-time@1 - 2", d3-time@2, d3-time@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/d3-time/-/d3-time-2.1.1.tgz"
-  integrity sha512-/eIQe/eR4kCQwq7yxi7z4c6qEXf2IYGcjoWB5OOQy4Tq9Uv39/947qlDcN2TLkiTzQWzvnsuYPB9TrWaNfipKQ==
-  dependencies:
-    d3-array "2"
-
-"d3-timer@1 - 2", d3-timer@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-timer/-/d3-timer-2.0.0.tgz"
-  integrity sha512-TO4VLh0/420Y/9dO3+f9abDEFYeCUr2WZRlxJvbp4HPTQcSylXNiL6yZa9FIUvV1yRiFufl1bszTCLDqv9PWNA==
-
-d3-transition@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-transition/-/d3-transition-2.0.0.tgz"
-  integrity sha512-42ltAGgJesfQE3u9LuuBHNbGrI/AJjNL2OAUdclE70UE6Vy239GCBEYD38uBPoLeNsOhFStGpPI0BAOV+HMxog==
-  dependencies:
-    d3-color "1 - 2"
-    d3-dispatch "1 - 2"
-    d3-ease "1 - 2"
-    d3-interpolate "1 - 2"
-    d3-timer "1 - 2"
-
-d3-zoom@2:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/d3-zoom/-/d3-zoom-2.0.0.tgz"
-  integrity sha512-fFg7aoaEm9/jf+qfstak0IYpnesZLiMX6GZvXtUSdv8RH2o4E2qeelgdU09eKS6wGuiGMfcnMI0nTIqWzRHGpw==
-  dependencies:
-    d3-dispatch "1 - 2"
-    d3-drag "2"
-    d3-interpolate "1 - 2"
-    d3-selection "2"
-    d3-transition "2"
-
-d3@^6.7.0:
-  version "6.7.0"
-  resolved "https://registry.npmjs.org/d3/-/d3-6.7.0.tgz"
-  integrity sha512-hNHRhe+yCDLUG6Q2LwvR/WdNFPOJQ5VWqsJcwIYVeI401+d2/rrCjxSXkiAdIlpx7/73eApFB4Olsmh3YN7a6g==
-  dependencies:
-    d3-array "2"
-    d3-axis "2"
-    d3-brush "2"
-    d3-chord "2"
-    d3-color "2"
-    d3-contour "2"
-    d3-delaunay "5"
-    d3-dispatch "2"
-    d3-drag "2"
-    d3-dsv "2"
-    d3-ease "2"
-    d3-fetch "2"
-    d3-force "2"
-    d3-format "2"
-    d3-geo "2"
-    d3-hierarchy "2"
-    d3-interpolate "2"
-    d3-path "2"
-    d3-polygon "2"
-    d3-quadtree "2"
-    d3-random "2"
-    d3-scale "3"
-    d3-scale-chromatic "2"
-    d3-selection "2"
-    d3-shape "2"
-    d3-time "2"
-    d3-time-format "3"
-    d3-timer "2"
-    d3-transition "2"
-    d3-zoom "2"
 
 d@1, d@^1.0.1:
   version "1.0.1"
@@ -1371,11 +1093,6 @@ deep-is@^0.1.3:
   version "0.1.3"
   resolved "https://registry.npmjs.org/deep-is/-/deep-is-0.1.3.tgz"
   integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
-
-delaunator@4:
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/delaunator/-/delaunator-4.0.1.tgz"
-  integrity sha512-WNPWi1IRKZfCt/qIDMfERkDp93+iZEmOxN2yy4Jg+Xhv8SLk2UTqqbe1sfiipn0and9QrE914/ihdx82Y/Giag==
 
 dir-glob@^3.0.1:
   version "3.0.1"
@@ -2006,13 +1723,6 @@ human-signals@^2.1.0:
   resolved "https://registry.npmjs.org/human-signals/-/human-signals-2.1.0.tgz"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-iconv-lite@0.4:
-  version "0.4.24"
-  resolved "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz"
-  integrity sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
-  dependencies:
-    safer-buffer ">= 2.1.2 < 3"
-
 ignore@^4.0.6:
   version "4.0.6"
   resolved "https://registry.npmjs.org/ignore/-/ignore-4.0.6.tgz"
@@ -2053,11 +1763,6 @@ inherits@2:
   version "2.0.4"
   resolved "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
-
-internmap@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/internmap/-/internmap-1.0.1.tgz"
-  integrity sha512-lDB5YccMydFBtasVtxnZ3MRBHuaoE8GKsppq+EchKL2U4nK/DmEpPHNH8MZe5HkMtpSiTSOZwfN0tzYjO/lJEw==
 
 is-binary-path@~2.1.0:
   version "2.1.0"
@@ -2229,7 +1934,7 @@ lodash.truncate@^4.4.2:
   resolved "https://registry.npmjs.org/lodash.truncate/-/lodash.truncate-4.4.2.tgz"
   integrity sha1-WjUNoLERO4N+z//VgSy+WNbq4ZM=
 
-lodash@^4.17.15, lodash@^4.17.21, lodash@latest:
+lodash@^4.17.15, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -2632,16 +2337,6 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-rw@1:
-  version "1.3.3"
-  resolved "https://registry.npmjs.org/rw/-/rw-1.3.3.tgz"
-  integrity sha1-P4Yt+pGrdmsUiF700BEkv9oHT7Q=
-
-"safer-buffer@>= 2.1.2 < 3":
-  version "2.1.2"
-  resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
-  integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
-
 semver@^7.2.1, semver@^7.3.2, semver@^7.3.5:
   version "7.3.5"
   resolved "https://registry.npmjs.org/semver/-/semver-7.3.5.tgz"
@@ -3040,26 +2735,10 @@ vscode-vue-languageservice@0.32.0:
     vscode-pug-languageservice "0.32.0"
     vscode-typescript-languageservice "0.32.0"
 
-vue-chart-3@^0.4.10:
-  version "0.4.10"
-  resolved "https://registry.npmjs.org/vue-chart-3/-/vue-chart-3-0.4.10.tgz"
-  integrity sha512-9Rn4PxwzuOrbNnbezrQHdJTB0BkKPzBQ3Xd77lYqEdkHTSSr9HWb6taurwA4BujsiacJckXHF8duJVnakeq+Qw==
-  dependencies:
-    "@vue/runtime-core" latest
-    "@vue/runtime-dom" latest
-    csstype latest
-    lodash latest
-    vue-demi latest
-
 vue-demi@*:
   version "0.9.0"
   resolved "https://registry.npmjs.org/vue-demi/-/vue-demi-0.9.0.tgz"
   integrity sha512-f8vVUpC726YXv99fF/3zHaw5CUYbP5H/DVWBN+pncXM8P2Uz88kkffwj9yD7MukuVzPICDHNrgS3VC2ursaP7g==
-
-vue-demi@latest:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.12.1.tgz#f7e18efbecffd11ab069d1472d7a06e319b4174c"
-  integrity sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==
 
 vue-eslint-parser@^7.6.0:
   version "7.6.0"

@@ -16,6 +16,7 @@ declare module 'vue' {
     'IMdi:cameraOutline': typeof import('~icons/mdi/camera-outline')['default']
     'IMdi:databaseExportOutline': typeof import('~icons/mdi/database-export-outline')['default']
     'IMdi:languageTypescript': typeof import('~icons/mdi/language-typescript')['default']
+    'IMdi:shareVariantOutline': typeof import('~icons/mdi/share-variant-outline')['default']
     IMdiGithub: typeof import('~icons/mdi/github')['default']
     InputText: typeof import('./src/components/InputText.vue')['default']
     'IUil:focusTarget': typeof import('~icons/uil/focus-target')['default']
