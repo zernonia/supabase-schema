@@ -30,7 +30,6 @@
     (n) => {
       try {
         if (!n) return
-        console.log({ n })
         const descrytedText = descryted(n.substring(1))
         const result = JSON.parse(descrytedText)
 
