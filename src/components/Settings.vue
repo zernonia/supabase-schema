@@ -71,20 +71,28 @@
       </form>
       <!-- arrow  -->
       <div class="flex gap-3 flex-col -left-3.95rem -top-1px !absolute">
-      <button
-        v-tooltip:left.tooltip="'Settings'"
+        <button
+          v-tooltip:left.tooltip="'Settings'"
           class="btn duration-300"
-        @click="togglePanel = !togglePanel"
-      >
-        <i-majesticons:cog-line></i-majesticons:cog-line>
-      </button>
-      <button
-        v-tooltip:left.tooltip="'Toggle Dark mode'"
+          @click="togglePanel = !togglePanel"
+        >
+          <i-majesticons:cog-line></i-majesticons:cog-line>
+        </button>
+        <button
+          v-tooltip:left.tooltip="'Toggle Dark mode'"
           class="btn duration-300"
-        @click="toggleDark()"
-      >
-        <i-majesticons:moon></i-majesticons:moon>
-      </button>
+          @click="toggleDark()"
+        >
+          <i-majesticons:moon></i-majesticons:moon>
+        </button>
+        <button
+          v-tooltip:left.tooltip="'Fetch / Refresh'"
+          class="btn-square-green duration-300"
+          @click.prevent="fetchData"
+        >
+          <i-heroicons-solid:lightning-bolt></i-heroicons-solid:lightning-bolt>
+        </button>
+      </div>
     </div>
   </menu>
 </template>
