@@ -70,16 +70,17 @@
         <span class="text-sm text-white-900">{{ error }}</span>
       </form>
       <!-- arrow  -->
+      <div class="flex gap-3 flex-col -left-3.95rem -top-1px !absolute">
       <button
         v-tooltip:left.tooltip="'Settings'"
-        class="-left-3.95rem -top-1px !absolute btn duration-300"
+          class="btn duration-300"
         @click="togglePanel = !togglePanel"
       >
         <i-majesticons:cog-line></i-majesticons:cog-line>
       </button>
       <button
         v-tooltip:left.tooltip="'Toggle Dark mode'"
-        class="-left-3.95rem top-14 !absolute btn duration-300"
+          class="btn duration-300"
         @click="toggleDark()"
       >
         <i-majesticons:moon></i-majesticons:moon>
