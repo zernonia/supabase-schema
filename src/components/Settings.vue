@@ -159,6 +159,14 @@
       })
   }
 
+  // fetch data if VITE_SUPABASE_API_URL is provided
+  const initialFetch = () => {
+    if (import.meta.env.VITE_SUPABASE_API_URL) {
+      fetchData()
+    }
+  }
+  initialFetch()
+
   const clearStorage = () => {
     localStorage.clear()
     window.location.reload()
