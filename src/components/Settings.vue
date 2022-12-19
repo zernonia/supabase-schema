@@ -156,7 +156,7 @@
     window.location.reload()
   }
 
-  // toggle Panel
+  // toggle Panel (closed by default when SUPABASE_API_URL provided)
   const togglePanel = useStorage(
     'togglePanel',
     import.meta.env.VITE_SUPABASE_API_URL ? false : true
