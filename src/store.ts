@@ -108,10 +108,10 @@ export const state = reactive({
 
 export const supabaseClientState = reactive({
   apikey: useStorage('supabase-apikey', {
-    url: '',
-    anon: '',
+    url: import.meta.env.VITE_SUPABASE_API_URL || '',
+    anon: import.meta.env.VITE_SUPABASE_ANON_KEY || '',
     last_url: '',
-  }),
+  } as { url: string; anon: string; last_url: string }),
   supabase: () =>
     createClient(
       supabaseClientState.apikey.url,
