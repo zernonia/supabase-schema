@@ -156,7 +156,10 @@
   }
 
   // toggle Panel
-  const togglePanel = useStorage('togglePanel', true)
+  const togglePanel = useStorage(
+    'togglePanel',
+    import.meta.env.VITE_SUPABASE_API_URL ? false : true
+  )
   const positionPanel = computed(() => {
     return togglePanel.value ? '1.25rem' : '-22.5rem'
   })
