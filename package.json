@@ -2,10 +2,10 @@
   "name": "supabase-schema",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "env-cmd -f .env.example vite",
     "build": "vite build",
     "test": "vue-tsc --noEmit",
-    "serve": "vite preview"
+    "serve": "env-cmd -f .env.example import-meta-env -x .env.example && vite preview"
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.11.14",
@@ -29,6 +29,7 @@
     "@vue/compiler-sfc": "^3.2.31",
     "@vue/eslint-config-typescript": "^10.0.0",
     "dotenv": "^16.0.3",
+    "env-cmd": "^10.1.0",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^7.9.0",
