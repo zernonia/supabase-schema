@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  schema:
+    container_name: supabase-schema
+    build: .
+    image: supabase-schema:latest
+    restart: unless-stopped
+    ports:
+      - 8080:80 # host:container
+    environment:
+      # do not remove .env.example
+      # you can define both variables on a new .env file
+      # this example is defined to match ENV substitution from supabase official repo.
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_API_URL: ${API_EXTERNAL_URL}
