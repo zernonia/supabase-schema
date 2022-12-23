@@ -86,6 +86,13 @@
           <i-majesticons:moon></i-majesticons:moon>
         </button>
         <button
+          v-tooltip:left.tooltip="'Clear Storage'"
+          class="btn-square-to-red duration-300"
+          @click.prevent="clearStorage"
+        >
+          <i-heroicons-solid:ban></i-heroicons-solid:ban>
+        </button>
+        <button
           v-tooltip:left.tooltip="'Fetch / Refresh'"
           class="btn-square-green duration-300"
           @click.prevent="fetchData"
