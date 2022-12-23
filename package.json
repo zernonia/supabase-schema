@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "env-cmd -f .env.example vite",
-    "build": "vite build",
+    "build": "vite build && env-cmd -f .env.example import-meta-env -x .env.example",
     "test": "vue-tsc --noEmit",
     "serve": "env-cmd -f .env.example import-meta-env -x .env.example && vite preview"
   },
