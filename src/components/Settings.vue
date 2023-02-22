@@ -70,20 +70,36 @@
         <span class="text-sm text-white-900">{{ error }}</span>
       </form>
       <!-- arrow  -->
-      <button
-        v-tooltip:left.tooltip="'Settings'"
-        class="-left-3.95rem -top-1px !absolute btn duration-300"
-        @click="togglePanel = !togglePanel"
-      >
-        <i-majesticons:cog-line></i-majesticons:cog-line>
-      </button>
-      <button
-        v-tooltip:left.tooltip="'Toggle Dark mode'"
-        class="-left-3.95rem top-14 !absolute btn duration-300"
-        @click="toggleDark()"
-      >
-        <i-majesticons:moon></i-majesticons:moon>
-      </button>
+      <div class="flex gap-3 flex-col -left-3.95rem -top-1px !absolute">
+        <button
+          v-tooltip:left.tooltip="'Settings'"
+          class="btn duration-300"
+          @click="togglePanel = !togglePanel"
+        >
+          <i-majesticons:cog-line></i-majesticons:cog-line>
+        </button>
+        <button
+          v-tooltip:left.tooltip="'Toggle Dark mode'"
+          class="btn duration-300"
+          @click="toggleDark()"
+        >
+          <i-majesticons:moon></i-majesticons:moon>
+        </button>
+        <button
+          v-tooltip:left.tooltip="'Clear Storage'"
+          class="btn-square-to-red duration-300"
+          @click.prevent="clearStorage"
+        >
+          <i-heroicons-solid:ban></i-heroicons-solid:ban>
+        </button>
+        <button
+          v-tooltip:left.tooltip="'Fetch / Refresh'"
+          class="btn-square-green duration-300"
+          @click.prevent="fetchData"
+        >
+          <i-heroicons-solid:lightning-bolt></i-heroicons-solid:lightning-bolt>
+        </button>
+      </div>
     </div>
   </menu>
 </template>
@@ -150,13 +166,24 @@
       })
   }
 
+  // fetch data if VITE_SUPABASE_API_URL is provided
+  const initialFetch = () => {
+    if (!!import.meta.env.SUPABASE_API_URL) {
+      fetchData()
+    }
+  }
+  initialFetch()
+
   const clearStorage = () => {
     localStorage.clear()
     window.location.reload()
   }
 
-  // toggle Panel
-  const togglePanel = useStorage('togglePanel', true)
+  // toggle Panel (closed by default when SUPABASE_API_URL provided)
+  const togglePanel = useStorage(
+    'togglePanel',
+    !!import.meta.env.SUPABASE_API_URL ? false : true
+  )
   const positionPanel = computed(() => {
     return togglePanel.value ? '1.25rem' : '-22.5rem'
   })

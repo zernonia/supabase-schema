@@ -8,6 +8,8 @@ declare module 'vue' {
     Helper: typeof import('./src/components/Helper.vue')['default']
     HelperZoom: typeof import('./src/components/HelperZoom.vue')['default']
     'IBx:bxNews': typeof import('~icons/bx/bx-news')['default']
+    'IHeroiconsSolid:ban': typeof import('~icons/heroicons-solid/ban')['default']
+    'IHeroiconsSolid:lightningBolt': typeof import('~icons/heroicons-solid/lightning-bolt')['default']
     'IHeroiconsSolid:minusSm': typeof import('~icons/heroicons-solid/minus-sm')['default']
     'IHeroiconsSolid:plusSm': typeof import('~icons/heroicons-solid/plus-sm')['default']
     'IIc:baselineAutoFixHigh': typeof import('~icons/ic/baseline-auto-fix-high')['default']
