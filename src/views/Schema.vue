@@ -101,8 +101,8 @@
       movX = e.movementX
       movY = e.movementY
     }
-    state.schemaView.translate.x += movX
-    state.schemaView.translate.y += movY
+    state.schemaView.translate.x -= movX
+    state.schemaView.translate.y -= movY
   }
   const dragEnd = (e: MouseEvent) => {
     isDragging.value = false
