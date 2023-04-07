@@ -4,5 +4,5 @@
     "source.fixAll": true
   },
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.preferences.autoImportFileExcludePatterns": ["vue-router"]
 }

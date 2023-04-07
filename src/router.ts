@@ -1,11 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-
-const routes = [
-  { path: '/', name: 'Schema', component: () => import('./views/Schema.vue') },
-]
+import { createRouter, createWebHistory } from 'vue-router/auto';
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
-})
-export default router
+});
+export default router;
