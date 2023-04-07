@@ -18,7 +18,7 @@ export default defineConfig({
     }),
     Icons(),
     WindiCSS(),
-    Vercel(),
+    // Vercel(),
   ],
   resolve: {
     alias: {

@@ -32,7 +32,6 @@ const generateBio = async () => {
         query: query.value,
       }),
     });
-    console.log(response);
 
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -52,6 +51,8 @@ const generateBio = async () => {
       done = doneReading;
       const chunkValue = decoder.decode(value);
       snippet.value = snippet.value + chunkValue;
+
+      console.log(snippet.value);
     }
   } catch (err) {
     console.log(err);
