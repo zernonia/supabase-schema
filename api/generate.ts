@@ -1,4 +1,4 @@
-import { OpenAIStream, OpenAIStreamPayload } from './utils/stream';
+import { OpenAIStream, OpenAIStreamPayload } from './_utils/stream';
 
 // @ts-ignore
 if (!process.env.OPENAI_API_KEY) {
@@ -21,17 +21,7 @@ const handler = async (req: Request): Promise<Response> => {
 
   const payload: OpenAIStreamPayload = {
     model: 'gpt-3.5-turbo',
-    messages: [
-      {
-        role: 'system',
-        content:
-          'You are Postgres & Supabase expert, and only return sql snippet.',
-      },
-      {
-        role: 'user',
-        content: `### Postgres SQL tables, with their properties:\n#${schema}\n### ${query}\n`,
-      },
-    ],
+    messages: [{ role: 'user', content: query }],
     temperature: 0.7,
     top_p: 1,
     frequency_penalty: 0,
@@ -40,6 +30,28 @@ const handler = async (req: Request): Promise<Response> => {
     stream: true,
     n: 1,
   };
+
+  // const payload: OpenAIStreamPayload = {
+  //   model: 'gpt-3.5-turbo',
+  //   messages: [
+  //     {
+  //       role: 'system',
+  //       content:
+  //         'You are Postgres & Supabase expert, and only return sql snippet.',
+  //     },
+  //     {
+  //       role: 'user',
+  //       content: `### Postgres SQL tables, with their properties:\n#${schema}\n### ${query}\n`,
+  //     },
+  //   ],
+  //   temperature: 0.7,
+  //   top_p: 1,
+  //   frequency_penalty: 0,
+  //   presence_penalty: 0,
+  //   max_tokens: 200,
+  //   stream: true,
+  //   n: 1,
+  // };
 
   const stream = await OpenAIStream(payload);
 
