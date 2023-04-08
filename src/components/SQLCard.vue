@@ -5,6 +5,7 @@ import { PropType, computed, onMounted, toRefs, watch } from 'vue';
 import { supabaseClientState } from '@/store';
 import hljs from 'highlight.js/lib/core';
 import sql from 'highlight.js/lib/languages/sql';
+
 import 'highlight.js/styles/dark.css';
 hljs.registerLanguage('sql', sql);
 
@@ -31,11 +32,11 @@ const highlightedCode = computed(
 
 <template>
   <div
-    class="text-left p-6 rounded-xl bg-light-300 dark:bg-dark-800 hover:bg-dark-700 transition md:max-w-144"
+    class="text-left p-6 rounded-xl bg-light-500 hover:bg-light-400 dark:bg-dark-800 hover:bg-dark-700 transition md:max-w-144"
   >
     <p class="text-dark-50">{{ item.query }}</p>
     <pre
-      class="mt-2 text-sm p-4 whitespace-pre-wrap border-light-500 bg-light-400 dark:bg-dark-900 rounded-lg border-2 dark:border-dark-border"
+      class="mt-2 text-sm p-4 whitespace-pre-wrap border-light-300 bg-light-300 dark:bg-dark-900 rounded-lg border-2 dark:border-dark-border"
       v-html="highlightedCode"
     ></pre>
 
@@ -45,7 +46,7 @@ const highlightedCode = computed(
           v-tooltip="copied ? 'Copied' : 'Copy'"
           :disabled="!item.result"
           @click.prevent="copy(item.result ?? '')"
-          class="text-dark-50 hover:text-light-300 transition"
+          class="text-dark-50 dark:hover:text-light-300 transition"
         >
           <i-mdi-clipboard-outline class=""></i-mdi-clipboard-outline>
         </button>
@@ -53,7 +54,7 @@ const highlightedCode = computed(
           v-tooltip="'Open SQL Editor'"
           :disabled="!item.result"
           @click.prevent="copyAndOpenSQLTab"
-          class="text-dark-50 hover:text-light-300 transition"
+          class="text-dark-50 dark:hover:text-light-300 transition"
         >
           <i-mdi-link class=""></i-mdi-link>
         </button>
@@ -69,3 +70,13 @@ const highlightedCode = computed(
     </div>
   </div>
 </template>
+
+<style lang="postcss">
+.hljs-keyword,
+.hljs-link,
+.hljs-literal,
+.hljs-section,
+.hljs-selector-tag {
+  @apply text-dark-50 dark:text-light-300;
+}
+</style>

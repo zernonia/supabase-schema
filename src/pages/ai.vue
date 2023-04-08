@@ -5,11 +5,10 @@ import { useStorage } from '@vueuse/core';
 import type { SQLCardItem, Table } from '@/interface';
 import SQLCard from '@/components/SQLCard.vue';
 
-const query = ref('How many products created this year?');
+const query = ref('');
+const isLoading = ref(false);
 
 const resultList = useStorage<SQLCardItem[]>('ai-result-list', () => []);
-
-const isLoading = ref(false);
 
 const authUserTable: Table = {
   title: 'auth.user',
@@ -37,7 +36,8 @@ const tableSchema = computed(() => {
     .join('\n#');
 });
 
-const generateBio = async () => {
+const generateSQL = async () => {
+  if (!query.value) return;
   try {
     const resultListIndex = resultList.value.length;
     resultList.value[resultListIndex] = {
@@ -90,7 +90,7 @@ const deleteCard = (index: number) => {
 </script>
 
 <template>
-  <div class="text-white p-8 pr-14 h-screen overflow-y-auto">
+  <div class="dark:text-white p-8 pr-14 h-screen overflow-y-auto">
     <h1 class="text-4xl">Supabase SQL AI</h1>
     <p class="mt-2 text-lg">
       Translate human language to SQL based on your Supabase project
@@ -113,11 +113,12 @@ const deleteCard = (index: number) => {
           <textarea
             v-model="query"
             rows="6"
-            class="p-4 bg-dark-700 border-none rounded-xl mt-4 focus:outline-none focus:ring-green-500 focus:ring-2"
+            placeholder="Can you write effient SQL? Can you?"
+            class="p-4 bg-light-500 dark:bg-dark-700 dark:placeholder-dark-50 border-none rounded-xl mt-4 focus:outline-none focus:ring-green-500 focus:ring-2"
           ></textarea>
           <button
-            @click="generateBio"
-            :disabled="isLoading"
+            @click="generateSQL"
+            :disabled="isLoading || query.length === 0"
             class="mt-4 bg-green-500 rounded-md px-4 py-2 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600 text-white"
           >
             Generate
