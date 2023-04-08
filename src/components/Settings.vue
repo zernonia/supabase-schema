@@ -71,9 +71,12 @@ const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
 const { name: routeName } = toRefs(useRoute());
-watch(routeName, () => {
+watch(routeName, (n) => {
   togglePanel.value = false;
+  if (n === '/ai') isAINew.value = false;
 });
+
+const isAINew = useStorage('is-ai-new', true);
 </script>
 
 <style></style>
@@ -180,6 +183,14 @@ watch(routeName, () => {
           @click="$router.push('/ai')"
         >
           <i-mdi:robot></i-mdi:robot>
+          <div
+            v-if="isAINew"
+            class="w-4 h-4 rounded-full bg-blue-500 absolute top-3.5 -left-3 animate-ping"
+          ></div>
+          <div
+            v-if="isAINew"
+            class="w-4 h-4 rounded-full bg-blue-500 absolute top-3.5 -left-3"
+          ></div>
         </button>
 
         <button
