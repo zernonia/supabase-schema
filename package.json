@@ -13,6 +13,7 @@
     "@vueuse/core": "^9.13.0",
     "crypto-js": "^4.1.1",
     "eventsource-parser": "^1.0.0",
+    "highlight.js": "^11.7.0",
     "html-to-image": "^1.11.11",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
@@ -34,7 +35,6 @@
     "unplugin-vue-components": "^0.24.1",
     "unplugin-vue-router": "^0.5.4",
     "vite": "^4.2.1",
-    "vite-plugin-vercel": "^0.1.7",
     "vite-plugin-windicss": "^1.8.10",
     "vue-tsc": "^1.2.0",
     "windicss": "^3.5.6"

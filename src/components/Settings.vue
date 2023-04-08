@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { computed, ref, nextTick } from 'vue';
+import { computed, ref, nextTick, watch, toRefs } from 'vue';
 import { useStorage } from '@vueuse/core';
 import { state, supabaseClientState } from '../store';
 import Logo from '../assets/logo.svg';
 import { useDark, useToggle } from '@vueuse/core';
+import { useRoute } from 'vue-router';
 
 const emit = defineEmits(['fetch']);
 // Form fetch data
 const definition = useStorage('definitions', {});
-const title = ref('Supabase Schema');
 const url = computed(() => supabaseClientState.apikey.url);
 const anon = computed(() => supabaseClientState.apikey.anon);
 const error = ref('');
@@ -60,11 +60,6 @@ const fetchData = () => {
     });
 };
 
-const clearStorage = () => {
-  localStorage.clear();
-  window.location.reload();
-};
-
 // toggle Panel
 const togglePanel = useStorage('togglePanel', true);
 const positionPanel = computed(() => {
@@ -74,6 +69,11 @@ const positionPanel = computed(() => {
 // dark mode
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
+
+const { name: routeName } = toRefs(useRoute());
+watch(routeName, () => {
+  togglePanel.value = false;
+});
 </script>
 
 <style></style>
@@ -167,8 +167,24 @@ const toggleDark = useToggle(isDark);
 
       <div class="absolute right-[105%] flex flex-col space-y-2 top-0">
         <button
-          v-tooltip:left.tooltip="'Settings'"
+          v-tooltip:left.tooltip="'Schema'"
           class="btn"
+          @click="$router.push('/')"
+        >
+          <i-ic:outline-account-tree></i-ic:outline-account-tree>
+        </button>
+
+        <button
+          v-tooltip:left.tooltip="'AI'"
+          class="btn"
+          @click="$router.push('/ai')"
+        >
+          <i-mdi:robot></i-mdi:robot>
+        </button>
+
+        <button
+          v-tooltip:left.tooltip="'Settings'"
+          class="btn !mt-12"
           @click="togglePanel = !togglePanel"
         >
           <i-majesticons:cog-line></i-majesticons:cog-line>
@@ -180,14 +196,6 @@ const toggleDark = useToggle(isDark);
           @click="toggleDark()"
         >
           <i-majesticons:moon></i-majesticons:moon>
-        </button>
-
-        <button
-          v-tooltip:left.tooltip="'AI'"
-          class="btn"
-          @click="$router.push('/ai')"
-        >
-          <i-mdi:robot></i-mdi:robot>
         </button>
       </div>
     </div>

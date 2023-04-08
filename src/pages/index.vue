@@ -138,7 +138,7 @@ onMounted(() => {
 </style>
 
 <template>
-  <div>
+  <div @wheel="$event.preventDefault()">
     <Helper />
 
     <SelectionArea

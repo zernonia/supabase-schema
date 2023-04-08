@@ -25,7 +25,7 @@ const handler = async (req: Request): Promise<Response> => {
       {
         role: 'system',
         content:
-          'You are Postgres & Supabase expert, and only return sql snippet.',
+          'You are Postgres & Supabase expert. Translate given natural language query into SQL without changing the case of the entries given.',
       },
       {
         role: 'user',
