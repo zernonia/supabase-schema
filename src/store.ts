@@ -1,7 +1,6 @@
 import { useStorage } from '@vueuse/core'
 import { reactive } from 'vue'
 import { Column, TableState } from './interface'
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 export const state = reactive({
   isModalOpen: false,
@@ -112,11 +111,6 @@ export const supabaseClientState = reactive({
     anon: '',
     last_url: '',
   }),
-  supabase: () =>
-    createClient(
-      supabaseClientState.apikey.url,
-      supabaseClientState.apikey.anon
-    ),
 })
 
 export const visualState = reactive({})
