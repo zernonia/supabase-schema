@@ -11,7 +11,7 @@ const isLoading = ref(false);
 const resultList = useStorage<SQLCardItem[]>('ai-result-list', () => []);
 
 const authUserTable: Table = {
-  title: 'auth.user',
+  title: 'auth.users',
   columns: [
     { title: 'id', format: 'uuid', type: 'string' },
     { title: 'email', format: 'varchar', type: 'string' },
