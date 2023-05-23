@@ -119,7 +119,8 @@ const deleteCard = (index: number) => {
           <button
             @click="generateSQL"
             :disabled="isLoading || query.length === 0"
-            class="umami--click--generate-sql mt-4 bg-green-500 rounded-md px-4 py-2 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600 text-white"
+            data-umami-event="Generate SQL"
+            class="mt-4 bg-green-500 rounded-md px-4 py-2 text-sm font-medium hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-600 text-white"
           >
             Generate
           </button>
