@@ -113,7 +113,7 @@ const deleteCard = (index: number) => {
           <textarea
             v-model="query"
             rows="6"
-            placeholder="Can you write effient SQL? Can you?"
+            placeholder="Can you write efficient SQL? Can you?"
             class="p-4 bg-light-500 dark:bg-dark-700 dark:placeholder-dark-50 border-none rounded-xl mt-4 focus:outline-none focus:ring-green-500 focus:ring-2"
           ></textarea>
           <button
