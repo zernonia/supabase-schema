@@ -44,11 +44,6 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@brillout/libassert@^0.5.8":
-  version "0.5.8"
-  resolved "https://registry.yarnpkg.com/@brillout/libassert/-/libassert-0.5.8.tgz#d0f78e5c0ee53aaae8c2aa675f0b0dfb544e32b0"
-  integrity sha512-u/fu+jTRUdNdbLONGq1plCfh+k2/XjSbGVTfnF3rHnSPZd+ABWp0XinR5ifrFkyGOzMbzv8IiQ44lZ4U6ZGrGA==
-
 "@esbuild/android-arm64@0.17.15":
   version "0.17.15"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.17.15.tgz#893ad71f3920ccb919e1757c387756a9bca2ef42"
@@ -485,15 +480,6 @@
     "@typescript-eslint/types" "5.57.1"
     eslint-visitor-keys "^3.3.0"
 
-"@vercel/routing-utils@^2.1.11":
-  version "2.1.11"
-  resolved "https://registry.yarnpkg.com/@vercel/routing-utils/-/routing-utils-2.1.11.tgz#5d479f6ea41e3f9b00546df7d1d5cadd6a0fe5ee"
-  integrity sha512-3cr0c41tylYvC6JMmzxC2kEf5iqFT0Kz1sqTs1koRVeiAEsf6soKi0FwW+ASbT3+9rBiJDkG2E1y4J3mZn6DZQ==
-  dependencies:
-    path-to-regexp "6.1.0"
-  optionalDependencies:
-    ajv "^6.0.0"
-
 "@viselect/vanilla@^3.2.6":
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/@viselect/vanilla/-/vanilla-3.2.6.tgz#cb212b5ebda4d9f6e7093e17e50b741430f3ab81"
@@ -782,7 +768,7 @@ acorn@^8.8.0, acorn@^8.8.2:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.2.tgz#1b2f25db02af965399b9776b0c2c391276d37c4a"
   integrity sha512-xjIYgE8HBrkpd/sJqOGNspf8uHG+NOHGOw6a/Urj8taM2EXfdNAH2oFcPeIFfsv3+kz/mJrS5VuMqbNLjCa2vw==
 
-ajv@^6.0.0, ajv@^6.10.0, ajv@^6.12.4:
+ajv@^6.10.0, ajv@^6.12.4:
   version "6.12.6"
   resolved "https://registry.npmjs.org/ajv/-/ajv-6.12.6.tgz"
   integrity sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
@@ -979,7 +965,7 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-esbuild@^0.17.14, esbuild@^0.17.5:
+esbuild@^0.17.5:
   version "0.17.15"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.17.15.tgz#209ebc87cb671ffb79574db93494b10ffaf43cbc"
   integrity sha512-LBUV2VsUIc/iD9ME75qhT4aJj0r75abCVS0jakhFzOtR7TQsqQA5w0tZ+KTKnwl3kXE0MhskNdHDh/I5aCR1Zw==
@@ -1746,11 +1732,6 @@ path-parse@^1.0.7:
   resolved "https://registry.npmjs.org/path-parse/-/path-parse-1.0.7.tgz"
   integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
-path-to-regexp@6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-6.1.0.tgz#0b18f88b7a0ce0bfae6a25990c909ab86f512427"
-  integrity sha512-h9DqehX3zZZDCEm+xbfU0ZmwCGFCAAraPJWMXJ4+v32NjZJilVg3k1TcKsRgIb8IQ/izZSaydDc1OhJCZvs2Dw==
-
 path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/path-type/-/path-type-4.0.0.tgz"
@@ -2084,17 +2065,6 @@ util-deprecate@^1.0.2:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
-vite-plugin-vercel@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/vite-plugin-vercel/-/vite-plugin-vercel-0.1.7.tgz#4250030bce62dfe302df45547e4f1bb3fe5da471"
-  integrity sha512-/ta0vTUoKeCsd9ox8TGaVkExRUQpWY92PtcB90ci6UUraul8RXwheOtx6ZALh4nSyiKDOPD3EdmppGlv9Aifdg==
-  dependencies:
-    "@brillout/libassert" "^0.5.8"
-    "@vercel/routing-utils" "^2.1.11"
-    esbuild "^0.17.14"
-    fast-glob "^3.2.12"
-    zod "^3.21.4"
-
 vite-plugin-windicss@^1.8.10:
   version "1.8.10"
   resolved "https://registry.yarnpkg.com/vite-plugin-windicss/-/vite-plugin-windicss-1.8.10.tgz#a0e022c5d3def185fb2458a0ba41fc140421ddcb"
@@ -2220,8 +2190,3 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
-
-zod@^3.21.4:
-  version "3.21.4"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.21.4.tgz#10882231d992519f0a10b5dd58a38c9dabbb64db"
-  integrity sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==
